@@ -4,4 +4,4 @@ metadata:
   name: linkding
 resources:
   - namespace.yaml
-  - deploymnet.yaml
+  - deployment.yaml
