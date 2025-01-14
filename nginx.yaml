@@ -4,11 +4,9 @@ metadata:
   labels:
     run: nginx
     method: fromcode
+    another: label
   name: nginx-yaml
 spec:
   containers:
   - image: nginx
     name: nginx
-  dnsPolicy: ClusterFirst
-  restartPolicy: Always
-status: {}
