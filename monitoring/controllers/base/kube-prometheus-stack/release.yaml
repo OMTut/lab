@@ -27,4 +27,14 @@ spec:
           kind: PrometheusRule
   values:
     grafana:
-      adminPassword: mischa
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+
+        hosts:
+          - grs.hondo-dev.com
+
+        tls:
+          - secretName: grafana-tls-secret
+            hosts:
+              - grs.hondo-dev.com
