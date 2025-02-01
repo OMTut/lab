@@ -34,7 +34,7 @@ spec:
         hosts:
           - grs.hondo-dev.com
 
-        tls: []
-        #  - secretName: grafana-tls-secret
-        #    hosts:
-        #      - grs.hondo-dev.com
+        tls:
+          - secretName: grafana-tls-secret
+            hosts:
+              - grs.hondo-dev.com
