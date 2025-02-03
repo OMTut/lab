@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Secret
 metadata:
     name: postgres-creds-arasaka
-    namesace: database-arasaka
+    namespace: database-arasaka
 type: Opaque
-data:
-    POSTGRES_USER: ENC[AES256_GCM,data:GU6S,iv:orJCszDZgW2GXgDDXlfVd8S11qS6bCjw78e1FSjNW+0=,tag:JCepIuFkW3bOMH9hoksQ3g==,type:str]
-    POSTGRES_PASSWORD: ENC[AES256_GCM,data:1cVteYiNDKmAi3Wa,iv:d1TGyFlomPBcIGwGGRs6/UPS0DpcBzTtGLoowfnNkuo=,tag:R/eH/h4PtwXWzhnEckN5sw==,type:str]
-    POSTGRES_DB: ENC[AES256_GCM,data:RBrjcOVNlGfN,iv:g1VMuKQ+l23Vg9PNyvSgin+aaIoXYTiOlWxTc3hhmro=,tag:09UL03q6IxiXe84YgVvaQA==,type:str]
+stringData:
+    POSTGRES_USER: ENC[AES256_GCM,data:hEsz,iv:hdOw4OtjMUiHp+txggFAIV6j21zKIxjEQmCMU8XkHQY=,tag:acMPTP04YfGNJPAqRGC9pA==,type:str]
+    POSTGRES_PASSWORD: ENC[AES256_GCM,data:MIpJMoYIR2Wl9wKq,iv:lMQizJ5MWFYaNrELTSqz1h2oYtInnlfgiYOlDAKXeyg=,tag:+Apfe/HKwTq6Y2YnBCyT3A==,type:str]
+    POSTGRES_DB: ENC[AES256_GCM,data:QHy9mjxGJfsq,iv:GfoQXUNh43xhhJzFPNojIeSTDPunmMyPeXeGLSJHC4U=,tag:3FkGVLHnlnKbWtutESFeLQ==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -17,14 +17,14 @@ sops:
         - recipient: age1d27ez6fmsuq2x5j42sqm4ldqre2mgxksmpq0y2rrhr4x6hfm4yus3qz34s
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB2eGFKTHlYRTBJRWpKTU91
-            SVpBM2xsWDZIekJOVHpRcVg1N0xlanBheVYwClBiVzFOQ3VxSlRKWDJjOEREdkxE
-            QlZSdS8wK21wRXhnVGJTQk5DVDJYMWsKLS0tIDdlUzZJZ1JTVDhRVE92Qzl2Z1Az
-            UEdtanErR0JyZXlYZnJOVkVsN2Q4NVEK3eLaPSjq9gw2LPd4IJcGDdkLcN9b0XAj
-            seopmwzf9jii4DyA28oYFmxoYZGNmnZmzt+kSHxPvSymQkxQm0ZjEg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBsTUZLbUEvSFpETWF6T2FW
+            d0VBbHR1Ny9BZUtRNnJGNUVpcHkzN2NtaEhJCi96YXordU9qc01IV25tRGhhZ2I5
+            TzFYT1crUS9sekdKdUl6WUwxb28zZE0KLS0tIDVQTk9uMlBXRXdIOFlkZGhSUTcw
+            U2dhbXZOTGJqZWNRYU5kcC9aVVpSaHcKYmReitvoFbl4NrB6kDTN8bOPYJbOOqH9
+            duTyVVpI0jMTFLAnMWmJoPcs6diU+RlKhzt/+EoJqX9o6n/O7Arsow==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-02-03T18:49:12Z"
-    mac: ENC[AES256_GCM,data:oKsfAVtw9UAa/KWr1WN1oeWySUK5SsOiUX11xIvx3VChSP6G9sR6wg3lgd2bb7z8FFaEQuyd3eHIfeQ4gRAJKsqjSVFMGEAzPjZNVQ/umOkhRvr/qRhr9Au58L/ONiwFO4+GIYf1AOZsR/dutzQ8FMLK0AkL2UubKzfMy9Z0wNk=,iv:axO3TqYwgRJd/tzyMajIplNLD4zrjl/fo7pTWCmYY5A=,tag:t0sHCnBZ3Gc+1OwzobfCIg==,type:str]
+    lastmodified: "2025-02-03T20:20:06Z"
+    mac: ENC[AES256_GCM,data:sXz3Nlt1vkp3lzemPqqR8eptt+hxzbtn64j3E2SDui1xYY6S0XdhbOeT4isWHgAzchIyrdN6U3PgywwWWr1wNluTcABZmfjSXYnCYbSuAH64uyoPWyBTqjg2k5j344IR/6+3hX1Mgbk6ZhSCIW0vsXf39v+9IBsihUcvIs6N0/U=,iv:NBNEN31cVxdoO7du7VUQQ3kYafBT6a66Aq2cdiuaQY0=,tag:JOtRFLS/FG75rAMMkmhplw==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.9.4
