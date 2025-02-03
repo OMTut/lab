@@ -5,9 +5,9 @@ metadata:
     namespace: database-arasaka
 type: Opaque
 stringData:
-    POSTGRES_USER: ENC[AES256_GCM,data:hEsz,iv:hdOw4OtjMUiHp+txggFAIV6j21zKIxjEQmCMU8XkHQY=,tag:acMPTP04YfGNJPAqRGC9pA==,type:str]
-    POSTGRES_PASSWORD: ENC[AES256_GCM,data:MIpJMoYIR2Wl9wKq,iv:lMQizJ5MWFYaNrELTSqz1h2oYtInnlfgiYOlDAKXeyg=,tag:+Apfe/HKwTq6Y2YnBCyT3A==,type:str]
-    POSTGRES_DB: ENC[AES256_GCM,data:QHy9mjxGJfsq,iv:GfoQXUNh43xhhJzFPNojIeSTDPunmMyPeXeGLSJHC4U=,tag:3FkGVLHnlnKbWtutESFeLQ==,type:str]
+    postgresql-user: ENC[AES256_GCM,data:hEsz,iv:hdOw4OtjMUiHp+txggFAIV6j21zKIxjEQmCMU8XkHQY=,tag:acMPTP04YfGNJPAqRGC9pA==,type:str]
+    postgresql-password: ENC[AES256_GCM,data:MIpJMoYIR2Wl9wKq,iv:lMQizJ5MWFYaNrELTSqz1h2oYtInnlfgiYOlDAKXeyg=,tag:+Apfe/HKwTq6Y2YnBCyT3A==,type:str]
+    postgresql-db: ENC[AES256_GCM,data:QHy9mjxGJfsq,iv:GfoQXUNh43xhhJzFPNojIeSTDPunmMyPeXeGLSJHC4U=,tag:3FkGVLHnlnKbWtutESFeLQ==,type:str]
 sops:
     kms: []
     gcp_kms: []
