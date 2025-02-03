@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: postgres-creds-arasaka
+    namesace: database-arasaka
+type: Opaque
+data:
+    POSTGRES_USER: ENC[AES256_GCM,data:GU6S,iv:orJCszDZgW2GXgDDXlfVd8S11qS6bCjw78e1FSjNW+0=,tag:JCepIuFkW3bOMH9hoksQ3g==,type:str]
+    POSTGRES_PASSWORD: ENC[AES256_GCM,data:1cVteYiNDKmAi3Wa,iv:d1TGyFlomPBcIGwGGRs6/UPS0DpcBzTtGLoowfnNkuo=,tag:R/eH/h4PtwXWzhnEckN5sw==,type:str]
+    POSTGRES_DB: ENC[AES256_GCM,data:RBrjcOVNlGfN,iv:g1VMuKQ+l23Vg9PNyvSgin+aaIoXYTiOlWxTc3hhmro=,tag:09UL03q6IxiXe84YgVvaQA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1d27ez6fmsuq2x5j42sqm4ldqre2mgxksmpq0y2rrhr4x6hfm4yus3qz34s
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB2eGFKTHlYRTBJRWpKTU91
+            SVpBM2xsWDZIekJOVHpRcVg1N0xlanBheVYwClBiVzFOQ3VxSlRKWDJjOEREdkxE
+            QlZSdS8wK21wRXhnVGJTQk5DVDJYMWsKLS0tIDdlUzZJZ1JTVDhRVE92Qzl2Z1Az
+            UEdtanErR0JyZXlYZnJOVkVsN2Q4NVEK3eLaPSjq9gw2LPd4IJcGDdkLcN9b0XAj
+            seopmwzf9jii4DyA28oYFmxoYZGNmnZmzt+kSHxPvSymQkxQm0ZjEg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-02-03T18:49:12Z"
+    mac: ENC[AES256_GCM,data:oKsfAVtw9UAa/KWr1WN1oeWySUK5SsOiUX11xIvx3VChSP6G9sR6wg3lgd2bb7z8FFaEQuyd3eHIfeQ4gRAJKsqjSVFMGEAzPjZNVQ/umOkhRvr/qRhr9Au58L/ONiwFO4+GIYf1AOZsR/dutzQ8FMLK0AkL2UubKzfMy9Z0wNk=,iv:axO3TqYwgRJd/tzyMajIplNLD4zrjl/fo7pTWCmYY5A=,tag:t0sHCnBZ3Gc+1OwzobfCIg==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData)$
+    version: 3.9.4
