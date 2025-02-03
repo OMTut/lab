@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ../base/helm-repos/bitnami-helm-repo.yaml
   - ../base/postgres-arasaka/helm-release.yaml
+  - ../base/postgres-arasaka/namespace.yaml
