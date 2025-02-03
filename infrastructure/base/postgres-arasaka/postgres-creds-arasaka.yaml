@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
     name: postgres-creds-arasaka
-    namespace: database-arasaka
+    namesace: database-arasaka
 type: Opaque
 data:
     POSTGRES_USER: ENC[AES256_GCM,data:GU6S,iv:orJCszDZgW2GXgDDXlfVd8S11qS6bCjw78e1FSjNW+0=,tag:JCepIuFkW3bOMH9hoksQ3g==,type:str]
