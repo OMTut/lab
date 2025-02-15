@@ -41,6 +41,16 @@ spec:
               value: postgres-arasaka-postgresql.database-arasaka.svc.cluster.local
             - name: POSTGRES_PORT
               value: "5432"
+            - name: LD_SUPERUSER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: linkding-container-env
+                  key: LD_SUPERUSER_NAME
+            - name: LD_SUPERUSER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: linkding-container-env
+                  key: LD_SUPERUSER_PASSWORD
           volumeMounts:
             - name: linkding-data
               mountPath: /etc/linkding/data
