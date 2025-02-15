@@ -24,8 +24,9 @@ spec:
           env:
             - name: POSTGRES_DB
               valueFrom:
-                name: ld-psql-secret
-                key: postgres-db
+                secretKeyRef:
+                  name: ld-psql-secret
+                  key: postgres-db
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
