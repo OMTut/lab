@@ -23,16 +23,18 @@ spec:
             - containerPort: 9090
           env:
             - name: POSTGRES_DB
-              value: linkding
+              valueFrom:
+                name: ld-psql-secret
+                key: postgres-db
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: postgres-creds-arasaka
+                  name: ld-psql-secret
                   key: postgres-user
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                 name: postgres-creds-arasaka
+                 name: ld-psql-secret
                  key: postgres-password
             - name: POSTGRES_HOST
               value: postgres-arasaka-postgresql.database-arasaka.svc.cluster.local
