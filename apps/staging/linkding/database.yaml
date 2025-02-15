@@ -1,18 +1,11 @@
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: linkding-db-staging
+  name: linkding-db-config
   namespace: linkding
-spec:
-  description: Postgres cluster for linkding
-  instances: 3
-  bootstrap:
-    initdb:
-      database: linkding
-      owner: linkding
-      secret:
-        name: linkding-db-creds
-  
-
-  storage:
-    size: 1Gi
+data:
+  POSTGRES_DB: linkding
+  POSTGRES_USER: postgres-user
+  POSTGRES_PASSWORD: postgres-password
+  POSTGRES_HOST: postgres-arasaka-postgresql.database-arasaka.svc.cluster.local
+  POSTGRES_PORT: "5432"
