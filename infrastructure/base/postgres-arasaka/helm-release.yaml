@@ -4,6 +4,7 @@ metadata:
   name: postgres-arasaka
   namespace: database-arasaka
 spec:
+  releaseName: postgres-arasaka
   interval: 5m
   chart:
     spec:
