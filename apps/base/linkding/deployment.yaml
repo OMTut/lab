@@ -51,6 +51,4 @@ spec:
                 secretKeyRef:
                   name: linkding-container-env
                   key: LD_SUPERUSER_PASSWORD
-          volumeMounts:
-            - name: linkding-data
-              mountPath: /etc/linkding/data
+
