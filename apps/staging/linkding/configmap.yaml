@@ -5,7 +5,5 @@ metadata:
   namespace: linkding
 data:
   POSTGRES_DB: linkding
-  POSTGRES_USER: postgresql-user
-  POSTGRES_PASSWORD: postgresql-password
   POSTGRES_HOST: postgres-arasaka-postgresql.database-arasaka.svc.cluster.local
   POSTGRES_PORT: "5432"
