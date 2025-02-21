@@ -21,35 +21,15 @@ spec:
           image: sissbruecker/linkding:1.31.0
           ports:
             - containerPort: 9090
-          env:
-            - name: LD_DB_ENGINE
-              value: "django.db.backends.postgresql"
-            - name: LD_DB_HOST
-              value: postgres-arasaka-postgresql.database-arasaka.svc.cluster.local
-            - name: LD_DB_PORT
-              value: "5432"
-            - name: LD_DB_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: ld-psql-secret
-                  key: postgresql-db
-            - name: LD_DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: ld-psql-secret
-                  key: postgresql-user
-            - name: LD_DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: ld-psql-secret
-                  key: postgresql-password
-            - name: LD_SUPERUSER_NAME
-              valueFrom:
-                secretKeyRef:
-                  name: linkding-container-env
-                  key: LD_SUPERUSER_NAME
-            - name: LD_SUPERUSER_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: linkding-container-env
-                  key: LD_SUPERUSER_PASSWORD
+          envFrom:
+            - secretRef:
+              name: linkding-container-env
+          securityContext:
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: linkding-data
+              mountPath: /etc/linkding/data
+      volumes:
+        - name: linkding-data
+          persistentVolumeClaim:
+            claimName: linkding-data-pvc
