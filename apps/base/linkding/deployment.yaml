@@ -26,17 +26,17 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: ld-psql-secret
-                  key: postgres-db
+                  key: postgresql-db
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
                   name: ld-psql-secret
-                  key: postgres-user
+                  key: postgresql-user
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: ld-psql-secret
-                  key: postgres-password
+                  key: postgresql-password
             - name: POSTGRES_HOST
               value: postgres-arasaka-postgresql.database-arasaka.svc.cluster.local
             - name: POSTGRES_PORT
