@@ -22,8 +22,8 @@ spec:
           ports:
             - containerPort: 9090
           envFrom:
-            - secretKeyRef:
-              name: linkding-container-env
+            - secretRef:
+                name: linkding-container-env
           securityContext:
             allowPrivilegeEscalation: false
           volumeMounts:
