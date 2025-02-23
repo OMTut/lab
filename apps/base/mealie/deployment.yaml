@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mealie
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mealie
+  template:
+    metadata:
+      labels:
+        app: mealie
+    spec:
+      containers:
+      - name: mealie
+        image: ghcr.io/mealie-recipes/mealie:v2.6.0
+        ports:
+        - containerPort: 9000
+        
+        env:
+        - name: ALLOW_SIGNUP
+          value: "false"
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "America/Chicago"
+        - name: BASE_URL
+          value: "https://mealie.hondo-dev.com"
+        # Database Settings
+        - name: DB_ENGINE
+          value: "postgres"
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: mealie-psql-secret
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mealie-psql-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_SERVER
+          value: "postgres-arasaka-postgresql.database-arasaka.svc.cluster.local"  # Adjust this if your PostgreSQL service uses a different DNS name.
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: mealie-psql-secret
+              key: POSTGRES_DB
+        volumeMounts:
+        - name: mealie-data
+          mountPath: /app/data
+        resources:
+          limits:
+            memory: "1000Mi"
+      volumes:
+      - name: mealie-data
+        persistentVolumeClaim:
+          claimName: mealie-data-pvc
