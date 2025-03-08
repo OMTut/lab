@@ -5,3 +5,5 @@ resources:
   - ../../base/rjt-web
   - rjt-secret.yaml
   - mariadb-secret.yaml
+  - cloudflare.yaml
+  - rjt-cloudflare-secret.yaml
