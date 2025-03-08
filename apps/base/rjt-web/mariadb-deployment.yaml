@@ -1,6 +1,6 @@
 # MariaDB Deployment
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mariadb
   namespace: rjt-web
