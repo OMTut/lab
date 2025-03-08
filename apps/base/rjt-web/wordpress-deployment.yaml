@@ -16,9 +16,28 @@ spec:
       containers:
         - name: wordpress
           image: wordpress:latest
-          envFrom:
-            - secretRef:
-                name: rjt-secret
+          env:
+            - name: WORDPRESS_DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: rjt-secret
+                  key: WORDPRESS_DB_HOST
+            - name: WORDPRESS_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rjt-secret
+                  key: WORDPRESS_DB_USER
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rjt-secret
+                  key: WORDPRESS_DB_PASSWORD
+            - name: WORDPRESS_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: rjt-secret
+                  key: WORDPRESS_DB_NAME
+
           ports:
             - containerPort: 80
           volumeMounts:
