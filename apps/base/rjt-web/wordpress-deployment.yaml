@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  namespace: rjt-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+        - name: wordpress
+          image: wordpress:latest
+          envFrom:
+            - secretRef:
+                name: rjt-secret
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: wordpress-pv
+              mountPath: /var/www/html
+      volumes:
+        - name: wordpress-pv
+          persistentVolumeClaim:
+            claimName: wordpress-pvc

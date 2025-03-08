@@ -1,0 +1,31 @@
+# MariaDB Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+  namespace: rjt-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+        - name: mariadb
+          image: mariadb:latest
+          envFrom:
+            - secretRef:
+                name: mariadb-secret
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mariadb-pv
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mariadb-pv
+          persistentVolumeClaim:
+            claimName: mariadb-pvc

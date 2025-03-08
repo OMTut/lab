@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: rjt-web
+resources:
+  - namespace.yaml
+  - wordpress-deployment.yaml
+  - wordpress-service.yaml
+  - mariadb-deployment.yaml
+  - mariadb-service.yaml
+  - storage.yaml
