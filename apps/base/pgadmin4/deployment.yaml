@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin4
+  namespace: pgadmin4
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin4
+  template:
+    metadata:
+      labels:
+        app: pgadmin4
+        db-access: weylandcorp
+    spec:
+      securityContext:
+        fsGroup: 5050 # pgadmin group ID
+        runAsUser: 5050 # pgadmin user ID
+        runAsGroup: 5050 # pgadmin group ID
+      containers:
+        - name: pgadmin4
+          image: dpage/pgadmin4:latest
+          ports:
+            - containerPort: 80
+          envFrom:
+            - secretRef:
+                name: pgadmin4-secret
+          securityContext:
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: pgadmin4-data
+              mountPath: /var/lib/pgadmin
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+      volumes:
+        - name: pgadmin4-data
+          persistentVolumeClaim:
+            claimName: pgadmin4-data-pvc
