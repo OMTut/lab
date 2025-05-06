@@ -7,6 +7,7 @@ kind: Secret
 metadata:
     creationTimestamp: null
     name: postgres-creds-weylandcorp
+    namespace: database-weylandcorp
 sops:
     kms: []
     gcp_kms: []
