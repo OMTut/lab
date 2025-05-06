@@ -1,13 +1,13 @@
 apiVersion: v1
+kind: Secret
+metadata:
+    name: postgres-creds-weylandcorp
+    namespace: database-weylandcorp
+type: Opaque
 stringData:
     postgres-db: ENC[AES256_GCM,data:o7+pAE0Cb7oeA9a2V7XjiMocWM0=,iv:2AhqPzYnjavOl8Y5rthNuyl2NUf2VeS7BpDvUMKdyOs=,tag:zFjxsJJCkFOy6JPCMdeS7g==,type:str]
     postgres-password: ENC[AES256_GCM,data:/xvL0FgIEf4VrD9X,iv:ukH0pheGKt2n0GHWAv5EfJ0oGSaal3ZZZpJwllOHz9o=,tag:xlj/cvq/RK58S/KBUZZRHQ==,type:str]
     postgres-user: ENC[AES256_GCM,data:TLTbahhdyVt8am20,iv:FoIhXdoxJy6F4Bkq5dx/D0+mcLParj7BJFOjGoymp58=,tag:YATTyjP3bPRSwm/zKiHHEg==,type:str]
-kind: Secret
-metadata:
-    creationTimestamp: null
-    name: postgres-creds-weylandcorp
-    namespace: database-weylandcorp
 sops:
     kms: []
     gcp_kms: []
