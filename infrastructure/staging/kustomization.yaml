@@ -8,3 +8,4 @@ resources:
   - ../base/postgres-weylandcorp/namespace.yaml
   - ../base/postgres-weylandcorp/helm-release.yaml
   - ../base/postgres-weylandcorp/postgres-creds-weylandcorp.yaml
+  - ./ingress-nginx

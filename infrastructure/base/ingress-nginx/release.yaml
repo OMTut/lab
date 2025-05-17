@@ -1,0 +1,83 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ingress-nginx
+  namespace: ingress-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: nginx-ingress-controller
+      version: ">=9.0.0"
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+      interval: 1m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 3
+      remediateLastFailure: true
+    cleanupOnFail: true
+  values:
+    ## Default values for the controller
+    controller:
+      name: controller
+      image:
+        registry: docker.io
+        repository: bitnami/nginx-ingress-controller
+        tag: latest
+        pullPolicy: IfNotPresent
+      
+      # Configure the service type
+      # Set to LoadBalancer for cloud environments
+      # Set to NodePort for local/on-prem environments
+      service:
+        type: NodePort
+        ports:
+          http: 80
+          https: 443
+        
+      # Resource limits
+      resources:
+        limits:
+          cpu: 500m
+          memory: 512Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
+          
+      # Security configurations
+      containerSecurityContext:
+        runAsUser: 1001
+        runAsNonRoot: true
+        allowPrivilegeEscalation: false
+        
+      # Metrics configuration for monitoring
+      metrics:
+        enabled: true
+        service:
+          annotations:
+            prometheus.io/scrape: "true"
+            prometheus.io/port: "10254"
+            
+      # Configure default SSL certificate
+      # defaultSSLCertificate: "ingress-system/default-ssl-certificate"
+      
+      # Additional configurations
+      config:
+        use-forwarded-headers: "true"
+        compute-full-forwarded-for: "true"
+        use-proxy-protocol: "false"
+        
+    # Default backend - uncomment if you want to use one
+    # defaultBackend:
+    #   enabled: true
+      
+    # RBAC settings
+    rbac:
+      create: true
