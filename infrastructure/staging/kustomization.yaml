@@ -1,6 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - ./ingress-nginx
   - ../base/postgres-arasaka/namespace.yaml
   - ../base/helm-repos/bitnami-helm-repo.yaml
   - ../base/postgres-arasaka/postgres-creds-arasaka.yaml
@@ -8,4 +9,3 @@ resources:
   - ../base/postgres-weylandcorp/namespace.yaml
   - ../base/postgres-weylandcorp/postgres-creds-weylandcorp.yaml
   - ../base/postgres-weylandcorp/helm-release.yaml
-  - ./ingress-nginx
