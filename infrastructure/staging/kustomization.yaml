@@ -6,6 +6,6 @@ resources:
   - ../base/postgres-arasaka/postgres-creds-arasaka.yaml
   - ../base/postgres-arasaka/helm-release.yaml
   - ../base/postgres-weylandcorp/namespace.yaml
-  - ../base/postgres-weylandcorp/helm-release.yaml
   - ../base/postgres-weylandcorp/postgres-creds-weylandcorp.yaml
+  - ../base/postgres-weylandcorp/helm-release.yaml
   - ./ingress-nginx
