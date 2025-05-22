@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mealie
+  namespace: mealie
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`mealie.wc`)
+      kind: Rule
+      services:
+        - name: mealie-service
+          port: 9000
