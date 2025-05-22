@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: drawio
+  namespace: drawio
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`drawio.wc`)
+      kind: Rule
+      services:
+        - name: drawio
+          port: 9070

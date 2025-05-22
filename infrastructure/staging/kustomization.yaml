@@ -12,3 +12,4 @@ resources:
   - ../base/traefik/helm-release.yaml
   - ../base/traefik/dashboard-ingressroute.yaml
   - ../base/traefik/ingressroute-mealie.yaml
+  - ../base/traefik/ingressroute-drawio.yaml
