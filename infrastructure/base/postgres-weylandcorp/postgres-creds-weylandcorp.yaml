@@ -6,7 +6,7 @@ data:
 kind: Secret
 metadata:
     creationTimestamp: null
-    name: postgres-creds-weylandcorp-64.yaml
+    name: postgres-creds-weylandcorp.yaml
 sops:
     kms: []
     gcp_kms: []
