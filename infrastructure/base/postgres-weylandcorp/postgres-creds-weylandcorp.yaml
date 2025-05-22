@@ -1,13 +1,12 @@
 apiVersion: v1
+data:
+    postgres-db: ENC[AES256_GCM,data:wSFIJwKbvtP1PhlSlbNuMd741Nk=,iv:qx7VzQGanwSBWlNTj6kjDtOzT49dzI6HKVoX97pt1JM=,tag:ebdfm+hf4YEBpD53u0GLOg==,type:str]
+    postgres-password: ENC[AES256_GCM,data:iUFaG4oS5WGQUU+b,iv:9GJL+50SdX+jSFrKIxMHothwGmb+Ow6SHYsijv3CXGI=,tag:tSpAW1Qwr9h9P8mjjkkhzw==,type:str]
+    postgres-user: ENC[AES256_GCM,data:a3I4/D8wLp446Ff1,iv:HSyfv1cwVfHC5L3UC4TbmkUFqJRZVxUlCbh3muBr0Ec=,tag:vnMV4w0UrrQItor2nWe/uA==,type:str]
 kind: Secret
 metadata:
-    name: postgres-creds-weylandcorp
-    namespace: database-weylandcorp
-type: Opaque
-stringData:
-    postgres-db: ENC[AES256_GCM,data:o7+pAE0Cb7oeA9a2V7XjiMocWM0=,iv:2AhqPzYnjavOl8Y5rthNuyl2NUf2VeS7BpDvUMKdyOs=,tag:zFjxsJJCkFOy6JPCMdeS7g==,type:str]
-    postgres-password: ENC[AES256_GCM,data:/xvL0FgIEf4VrD9X,iv:ukH0pheGKt2n0GHWAv5EfJ0oGSaal3ZZZpJwllOHz9o=,tag:xlj/cvq/RK58S/KBUZZRHQ==,type:str]
-    postgres-user: ENC[AES256_GCM,data:TLTbahhdyVt8am20,iv:FoIhXdoxJy6F4Bkq5dx/D0+mcLParj7BJFOjGoymp58=,tag:YATTyjP3bPRSwm/zKiHHEg==,type:str]
+    creationTimestamp: null
+    name: postgres-creds-weylandcorp-64.yaml
 sops:
     kms: []
     gcp_kms: []
@@ -17,14 +16,14 @@ sops:
         - recipient: age1d27ez6fmsuq2x5j42sqm4ldqre2mgxksmpq0y2rrhr4x6hfm4yus3qz34s
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByaFRPTi9sZlFSWkMreWhn
-            RHdSYlRHWS9sL1dEdFplY0JxZTJ0SGovV1IwCklIQmFndGtwZVZxbktIVERQUDI0
-            YXVhRWFkVzVJRUxteUJMNjZDSmJIeTQKLS0tIEh5djNQNE1UQncvbkQzTnVFOVcv
-            YWlhVHB2K1BML3NOKzVNNkJ0Q3ZKVzQKo2I6+6edc2i531jCOwdaIolmZbGpWrlm
-            ZVqV8NZX4XyYX7DB2MWP8sE+H9Zkf2HYOU6WGfZwviiQIgaaLWmNmg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSArZ0JXTzRYZ1RBUXZpcVdY
+            SVAxMm9EUDN3RVA3b3NFZHZxZVdUQ1Y2S2lrClN2OUhydUlQTDFMakJORVNGM01O
+            TWxMa2docG1tNkFUQm1iRlRiNi9BQUUKLS0tIERhcHcvTHlYbS9NeWdyN3dxdTJB
+            VnpSYTJrR1k3dWdlRndBOTlyYU1GbTAKBNOu2jz8MD0cQdeddcDvU1c9p7/HyZgm
+            2D8q2SpA7/wJ1LkGnOds9M+LPIRFBATLNJ7A5PY4eQSchPUI8egzcg==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-05-06T15:37:16Z"
-    mac: ENC[AES256_GCM,data:2NsdwDbITtJF7tENAuC7lcSnsS8p2L9FsOW+sHyZRP7239XWbYSbr4zWmB1cY1645xPQ4dSb/zi5nldhusM9MIALj8Ppbj1inDSYzneFBtEqLyB5CFITKatIzWBpdH460HMmEP/QQtfDm33vecMqQ9Xez63hVDvntE3Tam8k59Y=,iv:gFCMR7STaskgM/0zPwj6x5xlgRBXWfyP6ysuE4CQNrw=,tag:ZqnfgCtQr7cfqS1AlmHwcg==,type:str]
+    lastmodified: "2025-05-22T15:14:18Z"
+    mac: ENC[AES256_GCM,data:K5T9WUUxmbAVzHnC+DhqdmLbBVfVjLGBhFL6n2oEZkj2b2Zpgv3p6Eg2UHzL6PlIJyyKNUXqSNK9Pf6MKpfGMzxA9O03d+tnG4HVzwegQUHaNCogFyKRR4CvQXNWnhEetPh4lix/DTaRaIZoCNoi/Qd8VaC/HMSyBL2lC6BRpCE=,iv:RBrKd9BLBnR7pCnUgK7fIkU4dWaJ/llOqRUjgCujACA=,tag:agtps2DATuNjdEEz5sLJRQ==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData)$
     version: 3.9.4
