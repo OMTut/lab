@@ -8,3 +8,5 @@ resources:
   - ../base/postgres-weylandcorp/namespace.yaml
   - ../base/postgres-weylandcorp/postgres-creds-weylandcorp.yaml
   - ../base/postgres-weylandcorp/helm-release.yaml
+  - ../base/traefik/namespace.yaml
+  - ../base/traefik/helm-release.yaml

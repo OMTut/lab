@@ -1,0 +1,39 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: traefik
+      version: '>=23.1.0'
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+        namespace: flux-system
+  values:
+    # Enable the dashboard
+    dashboard:
+      enabled: true
+    
+    # Configure ports
+    ports:
+      web:
+        port: 80
+        # Enable hostPort to expose directly on the node
+        hostPort: 80
+      websecure:
+        port: 443
+        hostPort: 443
+
+    # Basic security settings
+    globalArguments:
+      - "--global.checknewversion=false"
+      - "--global.sendanonymoususage=false"
+
+    # Configure service
+    service:
+      enabled: true
+      type: LoadBalancer
