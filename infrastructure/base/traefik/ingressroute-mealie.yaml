@@ -5,7 +5,9 @@ metadata:
   namespace: mealie
 spec:
   entryPoints:
-    - web
+    - websecure
+  tls:
+    secretName: mealie-tls
   routes:
     - match: Host(`mealie.wc`)
       kind: Rule
