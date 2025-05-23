@@ -17,6 +17,14 @@ spec:
     # Enable the dashboard
     dashboard:
       enabled: true
+    ssl:
+      enabled: true
+      permanentRedirect: true
+    additionalArguments:
+      - "--providers.kubernetescrd.allowCrossNamespace=true"
+      - "--entrypoints.websecure.http.tls=true"
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
     
     # Configure ports
     ports:
@@ -27,6 +35,8 @@ spec:
       websecure:
         port: 443
         hostPort: 443
+        tls:
+          enabled: true
 
     # Basic security settings
     globalArguments:
