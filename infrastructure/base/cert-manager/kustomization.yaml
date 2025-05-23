@@ -5,3 +5,4 @@ resources:
   - helm-release.yaml
   - internal-ca.yaml
   - cert-mealie.yaml
+  - cert-drawio.yaml

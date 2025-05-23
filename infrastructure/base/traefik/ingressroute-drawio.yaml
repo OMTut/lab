@@ -5,7 +5,9 @@ metadata:
   namespace: drawio
 spec:
   entryPoints:
-    - web
+    - websecure
+  tls:
+    secretName: drawio-tls
   routes:
     - match: Host(`drawio.wc`)
       kind: Rule

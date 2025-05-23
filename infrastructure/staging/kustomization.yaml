@@ -18,3 +18,4 @@ resources:
   - ../base/cert-manager/helm-release.yaml
   - ../base/cert-manager/internal-ca.yaml
   - ../base/cert-manager/cert-mealie.yaml
+  - ../base/cert-manager/cert-drawio.yaml
