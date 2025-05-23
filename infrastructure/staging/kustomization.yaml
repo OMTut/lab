@@ -16,5 +16,4 @@ resources:
   - ../base/helm-repos/cert-manager-helm-repo.yaml
   - ../base/cert-manager/namespace.yaml
   - ../base/cert-manager/helm-release.yaml
-  - ../base/cert-manager/cluster-issuer-staging.yaml
-  - ../base/cert-manager/cluster-issuer-prod.yaml
+  - ../base/cert-manager/internal-ca.yaml

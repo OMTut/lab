@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - helm-release.yaml
-  - cluster-issuer-staging.yaml
-  # - cluster-issuer-prod.yaml
+  - internal-ca.yaml
