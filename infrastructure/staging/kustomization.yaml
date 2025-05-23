@@ -13,6 +13,6 @@ resources:
   - ../base/traefik/dashboard-ingressroute.yaml
   - ../base/traefik/ingressroute-mealie.yaml
   - ../base/traefik/ingressroute-drawio.yaml
-  - ../helm-repos/cert-manager-helm-repo.yaml
+  - ../base/helm-repos/cert-manager-helm-repo.yaml
   - ../base/cert-manager/namespace.yaml
   - ../base/cert-manager/helm-release.yaml
