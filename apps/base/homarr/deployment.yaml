@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: homarr
-  spec:
+    spec:
       containers:
       - name: homarr
         image: ghcr.io/ajnart/homarr:latest
