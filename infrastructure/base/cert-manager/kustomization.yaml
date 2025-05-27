@@ -6,3 +6,4 @@ resources:
   - internal-ca.yaml
   - cert-mealie.yaml
   - cert-drawio.yaml
+  - cert-homarr.yaml

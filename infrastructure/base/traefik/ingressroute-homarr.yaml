@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homarr
+  namespace: homarr
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: homarr-tls
+  routes:
+    - match: Host(`homarr.wc`)
+      kind: Rule
+      services:
+        - name: homarr-service
+          port: 9010

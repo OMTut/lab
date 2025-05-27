@@ -13,9 +13,11 @@ resources:
   - ../base/traefik/dashboard-ingressroute.yaml
   - ../base/traefik/ingressroute-mealie.yaml
   - ../base/traefik/ingressroute-drawio.yaml
+  - ../base/traefik/ingressroute-homarr.yaml
   - ../base/helm-repos/cert-manager-helm-repo.yaml
   - ../base/cert-manager/namespace.yaml
   - ../base/cert-manager/helm-release.yaml
   - ../base/cert-manager/internal-ca.yaml
   - ../base/cert-manager/cert-mealie.yaml
   - ../base/cert-manager/cert-drawio.yaml
+  - ../base/cert-manager/cert-homarr.yaml
