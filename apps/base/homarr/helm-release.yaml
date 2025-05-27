@@ -35,3 +35,5 @@ spec:
         enabled: true
         storageClass: "local-path"
         size: 1Gi
+        mountPath: "/app/data"
+        name: "homarr-config"
