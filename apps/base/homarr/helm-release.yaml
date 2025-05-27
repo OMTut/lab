@@ -14,10 +14,6 @@ spec:
         name: homarr
         namespace: flux-system
   values:
-    image:
-      repository: ghcr.io/ajnart/homarr
-      tag: 0.14.2
-    
     ingress:
       enabled: true
       annotations:
