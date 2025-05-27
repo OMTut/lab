@@ -6,4 +6,4 @@ metadata:
 spec:
   type: oci
   interval: 1h
-  url: oci://ghcr.io/homarr-labs/charts
+  url: oci://ghcr.io/homarr-labs/charts/homarr
