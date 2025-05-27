@@ -16,6 +16,7 @@ resources:
   - ../base/traefik/ingressroute-drawio.yaml
   - ../base/traefik/ingressroute-homarr.yaml
   - ../base/helm-repos/cert-manager-helm-repo.yaml
+  - ../base/helm-repos/homarr-helm-repo.yaml
   - ../base/cert-manager/namespace.yaml
   - ../base/cert-manager/helm-release.yaml
   - ../base/cert-manager/internal-ca.yaml
