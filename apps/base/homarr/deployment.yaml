@@ -16,7 +16,7 @@ spec:
       - name: homarr
         image: ghcr.io/ajnart/homarr:latest
         ports:
-        - containerPort: 9010
+        - containerPort: 7575
         resources:
           limits:
             cpu: "500m"

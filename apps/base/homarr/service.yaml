@@ -4,7 +4,7 @@ metadata:
   name: homarr
 spec:
   ports:
-    - port: 9010
+    - port: 7575
       protocol: TCP
       name: http
   selector:
