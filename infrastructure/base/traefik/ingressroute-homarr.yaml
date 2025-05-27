@@ -12,5 +12,5 @@ spec:
     - match: Host(`homarr.wc`)
       kind: Rule
       services:
-        - name: homarr-service
+        - name: homarr
           port: 9010
