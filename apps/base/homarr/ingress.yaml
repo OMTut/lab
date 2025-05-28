@@ -5,10 +5,9 @@ metadata:
   namespace: homarr
 spec:
   entryPoints:
-    - web
-  #   - websecure
-  # tls:
-  #   secretName: homarr-tls
+    - websecure
+  tls:
+    secretName: homarr-tls
   routes:
     - match: Host(`homarr.wc`)
       kind: Rule
