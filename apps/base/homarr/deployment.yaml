@@ -25,4 +25,4 @@ spec:
       volumes:
       - name: homarr-data
         persistentVolumeClaim:
-          claimName: homarr-pvc
+          claimName: homarr-config
