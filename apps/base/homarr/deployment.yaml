@@ -19,6 +19,7 @@ spec:
         image: ghcr.io/ajnart/homarr:latest
         ports:
         - containerPort: 7575
+        args: ["--port", "7575", "--hostname", "0.0.0.0"]
         volumeMounts:
         - mountPath: /app/data/configs
           name: homarr-data
