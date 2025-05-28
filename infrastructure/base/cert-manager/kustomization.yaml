@@ -7,3 +7,4 @@ resources:
   - cert-mealie.yaml
   - cert-drawio.yaml
   - cert-homarr.yaml
+  - cert-traefik.yaml

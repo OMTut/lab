@@ -10,3 +10,4 @@ resources:
   - ../base/postgres-weylandcorp/postgres-creds-weylandcorp.yaml
   - ../base/postgres-weylandcorp/helm-release.yaml
   - ../base/cert-manager/
+  - ../base/traefik/

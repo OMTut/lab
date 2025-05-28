@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-dashboard
+  namespace: kube-system
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: traefik-tls
+  routes:
+    - match: Host(`traefik.wc`)
+      kind: Rule
+      services:
+        - name: traefik
+          port: 9000
