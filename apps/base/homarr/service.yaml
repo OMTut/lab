@@ -6,6 +6,6 @@ spec:
   selector:
     app: homarr
   ports:
-    - name: https
+    - name: http
       port: 7575
       targetPort: 7575
