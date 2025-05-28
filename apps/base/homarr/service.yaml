@@ -6,6 +6,6 @@ spec:
   selector:
     app: homarr
   ports:
-    - protocol: TCP
+    - name: http
       port: 9010
       targetPort: 7575
