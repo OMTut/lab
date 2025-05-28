@@ -1,26 +1,17 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
   name: homarr
   namespace: homarr
-  annotations:
-    kubernetes.io/ingress.class: "traefik"
-    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/service.scheme: "http"
 spec:
+  entryPoints:
+    - web
+    - websecure
   tls:
-  - hosts:
-    - homarr.wc
     secretName: homarr-tls
-  rules:
-  - host: homarr.wc
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: homarr
-            port:
-              number: 80
+  routes:
+    - match: Host(`homarr.wc`)
+      kind: Rule
+      services:
+        - name: homarr
+          port: 80
