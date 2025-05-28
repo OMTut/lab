@@ -5,7 +5,7 @@ metadata:
   namespace: homarr
 spec:
   entryPoints:
-    - websecure
+    - web
   tls:
     secretName: homarr-tls
   routes:
