@@ -6,8 +6,6 @@ metadata:
 spec:
   entryPoints:
     - web
-  tls:
-    secretName: homarr-tls
   routes:
     - match: Host(`homarr.wc`)
       kind: Rule
