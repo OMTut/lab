@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: homarr
-        image: ghcr.io/ajnart/homarr:nightly
+        image: ghcr.io/ajnart/homarr:latest
         # command: ["yarn"]
         # args: ["start", "--port", "7575", "--hostname", "0.0.0.0"]
         ports:
