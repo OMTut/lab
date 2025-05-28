@@ -46,4 +46,4 @@ spec:
     # Configure service
     service:
       enabled: true
-      type: LoadBalancer
+      type: ClusterIP
