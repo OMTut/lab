@@ -3,23 +3,11 @@ kind: Kustomization
 resources:
   - ../base/cni/
   - ../base/postgres-arasaka/namespace.yaml
-  - ../base/helm-repos/bitnami-helm-repo.yaml
+  - ../base/helm-repos/
   - ../base/postgres-arasaka/postgres-creds-arasaka.yaml
   - ../base/postgres-arasaka/helm-release.yaml
   - ../base/postgres-weylandcorp/namespace.yaml
   - ../base/postgres-weylandcorp/postgres-creds-weylandcorp.yaml
   - ../base/postgres-weylandcorp/helm-release.yaml
-  - ../base/traefik/namespace.yaml
-  - ../base/traefik/helm-release.yaml
-  - ../base/traefik/dashboard-ingressroute.yaml
-  - ../base/traefik/ingressroute-mealie.yaml
-  - ../base/traefik/ingressroute-drawio.yaml
-  - ../base/traefik/ingressroute-homarr.yaml
-  - ../base/helm-repos/cert-manager-helm-repo.yaml
-  - ../base/helm-repos/homarr-helm-repo.yaml
-  - ../base/cert-manager/namespace.yaml
-  - ../base/cert-manager/helm-release.yaml
-  - ../base/cert-manager/internal-ca.yaml
-  - ../base/cert-manager/cert-mealie.yaml
-  - ../base/cert-manager/cert-drawio.yaml
-  - ../base/cert-manager/cert-homarr.yaml
+  - ../base/traefik/
+  - ../base/cert-manager/
