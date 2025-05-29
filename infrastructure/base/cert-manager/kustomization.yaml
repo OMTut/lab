@@ -8,3 +8,4 @@ resources:
   - cert-drawio.yaml
   - cert-homarr.yaml
   - cert-traefik.yaml
+  - cert-grafana.yaml
