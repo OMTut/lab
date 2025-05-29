@@ -46,5 +46,3 @@ spec:
                     port: 80
             tls:
               - secretName: grafana-tls-secret
-                hosts:
-                  - grs.hondo-dev.com
