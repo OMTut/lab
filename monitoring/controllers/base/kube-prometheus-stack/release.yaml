@@ -45,4 +45,4 @@ spec:
                   - name: kube-prometheus-stack-grafana
                     port: 80
             tls:
-              - secretName: grafana-tls-secret
+              secretName: grafana-tls-secret
