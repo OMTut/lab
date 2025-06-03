@@ -17,6 +17,10 @@ spec:
   values:
     auth:
       existingSecret: postgres-creds-arasaka
+      secretKeys:
+        adminPasswordKey: postgres-password
+        userPasswordKey: postgres-password 
+        replicationPasswordKey: postgres-password
     primary:
       persistence:
         enabled: true
