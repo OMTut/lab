@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: postgres-weylandcorp-policy
-  namespace: database-weylandcorp
+  name: postgres-arasaka-policy
+  namespace: database-arasaka
 spec:
   podSelector:
     matchLabels:
@@ -11,12 +11,14 @@ spec:
     - Ingress
   ingress:
     - from:
-      - podSelector:                # Allow pgadmin4 to access
+      - podSelector:            # Allow pgadmin4 to access
           matchLabels:
             app: pgadmin4
       - podSelector:
           matchLabels:
-            db-access: weylandcorp  # Pods must have this label
+            app: pgadmin4
+            db-access: arasaka  # Pods must have this label
       ports:
         - protocol: TCP
           port: 5432
+
