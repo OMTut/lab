@@ -16,7 +16,6 @@ spec:
             app: pgadmin4
       - podSelector:
           matchLabels:
-            app: pgadmin4
             db-access: arasaka  # Pods must have this label
       ports:
         - protocol: TCP
