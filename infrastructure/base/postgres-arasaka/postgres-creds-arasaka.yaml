@@ -4,7 +4,7 @@ metadata:
     name: postgres-creds-arasaka
     namespace: database-arasaka
 type: Opaque
-stringData:
+data:
     postgres-password: ENC[AES256_GCM,data:8oWtaU5A+p0xEeC9,iv:zqIAtydSX67NLGROdeJfgFSY4Bb7sCiZ3NkaMp8XOFM=,tag:BNfdvOZlOm510I4k81aHOQ==,type:str]
     postgres-user: ENC[AES256_GCM,data:7sit,iv:+Fvl9nrT6dIiUaWwmuIU6RYIExMeJSOHW+ecPUnZY4w=,tag:NIzJoshqc3Lw7t1vtrpc5Q==,type:str]
     postgres-db: ENC[AES256_GCM,data:2Or8fInjZfpw,iv:oXJoQYZWePKS3grvlx59DPwMlcv8/j1kyyFQ96/b9pI=,tag:uACiIdMBJh+Oibeh257lSw==,type:str]
