@@ -28,7 +28,7 @@ spec:
         - name: TZ
           value: "America/Chicago"
         - name: BASE_URL
-          value: "https://mealie.hondo-dev.com"
+          value: "https://mealie.wc"
         # Database Settings
         - name: DB_ENGINE
           value: "postgres"
