@@ -53,7 +53,7 @@ metadata:
   namespace: clearpath
 data:
   config.yaml: |
-    tunnel: clearpath-tunnel
+    tunnel: 7feb0200-aab3-4f37-af19-a374fb211f2d
     credentials-file: /etc/cloudflared/creds/credentials.json
     metrics: 0.0.0.0:2000
     no-autoupdate: true
