@@ -6,3 +6,5 @@ namespace: clearpath
 resources:
   - ../../base/clearpath
   - clearpath-secret.yaml
+  - cloudflare.yaml
+  - clearpath-tunnel-credentials.yaml
