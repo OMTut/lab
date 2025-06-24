@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clearpath-backend
+  namespace: clearpath
+  labels:
+    app: clearpath-backend
+    component: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clearpath-backend
+  template:
+    metadata:
+      labels:
+        app: clearpath-backend
+        component: backend
+    spec:
+      containers:
+      - name: backend
+        image: ghcr.io/omtut/clearpath-backend:latest
+        ports:
+        - containerPort: 5000
+          name: http
+        envFrom:
+        - secretRef:
+            name: clearpath-secret
+        livenessProbe:
+          httpGet:
+            path: /api/home
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/home
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
