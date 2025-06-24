@@ -28,13 +28,13 @@ spec:
             name: clearpath-secret
         livenessProbe:
           httpGet:
-            path: /api/home
+            path: /api/home?userId=health-check
             port: 5000
           initialDelaySeconds: 30
           periodSeconds: 10
         readinessProbe:
           httpGet:
-            path: /api/home
+            path: /api/home?userId=health-check
             port: 5000
           initialDelaySeconds: 5
           periodSeconds: 5
