@@ -24,8 +24,8 @@ spec:
         - containerPort: 80
           name: http
         env:
-        - name: REACT_APP_API_URL
-          value: "/api"  # Use relative API path for external access
+        - name: REACT_APP_API_BASE_URL
+          value: "https://clearpath.hondo-dev.com/api"
         livenessProbe:
           httpGet:
             path: /
