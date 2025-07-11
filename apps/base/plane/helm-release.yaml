@@ -16,7 +16,8 @@ spec:
   values:
     ingress:
       enabled: true
-      host: plane.wc
+      appHost: plane.wc
+      ingressClass: traefik
       annotations:
         traefik.ingress.kubernetes.io/router.entrypoints: websecure
         traefik.ingress.kubernetes.io/router.tls: "true"
