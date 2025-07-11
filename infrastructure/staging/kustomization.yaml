@@ -9,5 +9,8 @@ resources:
   - ../base/postgres-weylandcorp/namespace.yaml
   - ../base/postgres-weylandcorp/postgres-creds-weylandcorp.yaml
   - ../base/postgres-weylandcorp/helm-release.yaml
+  - ../base/minio/namespace.yaml
+  - ../base/minio/minio-secret.yaml
+  - ../base/minio/helm-release.yaml
   - ../base/cert-manager/
   - ../base/traefik/
