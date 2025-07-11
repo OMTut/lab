@@ -43,7 +43,7 @@ spec:
       containers:
       - name: plane-backend
         image: makeplane/plane-backend:latest
-        command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+        command: ["sh", "-c", "export DATABASE_URL=postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_SERVER:$POSTGRES_PORT/$POSTGRES_DB && exec python manage.py runserver 0.0.0.0:8000"]
         ports:
         - containerPort: 8000
         env:
