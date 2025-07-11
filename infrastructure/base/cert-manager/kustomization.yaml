@@ -9,3 +9,4 @@ resources:
   - cert-homarr.yaml
   - cert-traefik.yaml
   - cert-grafana.yaml
+  - cert-minio.yaml
