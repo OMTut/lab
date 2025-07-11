@@ -16,7 +16,7 @@ spec:
       containers:
       - name: plane-web
         image: makeplane/plane-frontend:latest
-        command: ["sh", "-c", "echo '{\"pipeline\": {\"start\": {}}}' > turbo.json && npm run start"]
+        command: ["sh", "-c", "cd /app && npx next start -p 3000"]
         ports:
         - containerPort: 3000
         env:
