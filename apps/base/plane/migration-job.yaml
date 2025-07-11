@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: plane-migrate
+  namespace: plane
+spec:
+  template:
+    spec:
+      containers:
+      - name: plane-migrate
+        image: makeplane/plane-backend:latest
+        command: ["sh", "-c", "export DATABASE_URL=postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@$POSTGRES_SERVER:$POSTGRES_PORT/$POSTGRES_DB && python manage.py migrate"]
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: plane-secret
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: plane-secret
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_SERVER
+          value: "postgres-arasaka-postgresql.database-arasaka.svc.cluster.local"
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: plane-secret
+              key: POSTGRES_DB
+        - name: REDIS_URL
+          value: "redis://plane-redis:6379"
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: plane-secret
+              key: SECRET_KEY
+        - name: DEBUG
+          value: "0"
+      restartPolicy: Never
+  backoffLimit: 4
