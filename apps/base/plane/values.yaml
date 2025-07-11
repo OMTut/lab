@@ -1,0 +1,39 @@
+ingress:
+  enabled: true
+  host: plane.wc
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    cert-manager.io/cluster-issuer: internal-ca
+  tls:
+    - hosts:
+        - plane.wc
+      secretName: plane-tls
+
+postgres:
+  enabled: false
+  host: postgres-arasaka-postgresql.database-arasaka.svc.cluster.local
+  port: 5432
+  database: 
+    existingSecret: plane-secret
+    existingSecretKey: POSTGRES_DB
+  username: 
+    existingSecret: plane-secret
+    existingSecretKey: POSTGRES_USER
+  password: 
+    existingSecret: plane-secret
+    existingSecretKey: POSTGRES_PASSWORD
+
+redis:
+  enabled: false
+  host: plane-redis
+  port: 6379
+
+# Reference existing secret for SECRET_KEY
+secretKey:
+  existingSecret: plane-secret
+  existingSecretKey: SECRET_KEY
+
+env:
+  NEXT_PUBLIC_API_BASE_URL: "https://plane.wc"
+  NEXT_PUBLIC_DEPLOY_URL: "https://plane.wc"

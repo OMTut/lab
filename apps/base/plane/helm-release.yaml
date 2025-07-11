@@ -1,0 +1,50 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: plane
+  namespace: plane
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: plane
+      version: "1.0.0"  # Check for latest version
+      sourceRef:
+        kind: HelmRepository
+        name: plane
+        namespace: flux-system
+  values:
+    ingress:
+      enabled: true
+      host: plane.wc
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        cert-manager.io/cluster-issuer: internal-ca
+      tls:
+        - hosts:
+            - plane.wc
+          secretName: plane-tls
+    postgres:
+      enabled: false
+      host: postgres-arasaka-postgresql.database-arasaka.svc.cluster.local
+      port: 5432
+      database:
+        existingSecret: plane-secret
+        existingSecretKey: POSTGRES_DB
+      username:
+        existingSecret: plane-secret
+        existingSecretKey: POSTGRES_USER
+      password:
+        existingSecret: plane-secret
+        existingSecretKey: POSTGRES_PASSWORD
+    redis:
+      enabled: false
+      host: plane-redis
+      port: 6379
+    secretKey:
+      existingSecret: plane-secret
+      existingSecretKey: SECRET_KEY
+    env:
+      NEXT_PUBLIC_API_BASE_URL: "https://plane.wc"
+      NEXT_PUBLIC_DEPLOY_URL: "https://plane.wc"
