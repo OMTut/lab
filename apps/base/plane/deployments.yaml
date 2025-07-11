@@ -16,6 +16,7 @@ spec:
       containers:
       - name: plane-web
         image: makeplane/plane-frontend:latest
+        command: ["npm", "start"]
         ports:
         - containerPort: 3000
         env:
@@ -42,6 +43,7 @@ spec:
       containers:
       - name: plane-backend
         image: makeplane/plane-backend:latest
+        command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
         ports:
         - containerPort: 8000
         env:
