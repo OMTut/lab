@@ -4,3 +4,4 @@ resources:
   - namespace.yaml
   - minio-secret.yaml
   - helm-release.yaml
+  - ingress.yaml
