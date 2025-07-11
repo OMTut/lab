@@ -17,15 +17,14 @@ spec:
     ingress:
       enabled: true
       appHost: plane.wc
-      ingressClass: traefik
       annotations:
-        traefik.ingress.kubernetes.io/router.entrypoints: web
-        # traefik.ingress.kubernetes.io/router.tls: "true"
-        # cert-manager.io/cluster-issuer: internal-ca
-      # tls:
-      #   - hosts:
-      #       - plane.wc
-      #     secretName: plane-tls
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        traefik.ingress.kubernetes.io/router.tls: "true"
+        cert-manager.io/cluster-issuer: internal-ca
+      tls:
+        - hosts:
+            - plane.wc
+          secretName: plane-tls
       host: plane.wc
     postgres:
       enabled: false
