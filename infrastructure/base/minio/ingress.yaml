@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - minio.lab.local
+    - minio.wc
     secretName: minio-tls
   rules:
-  - host: minio.lab.local
+  - host: minio.wc
     http:
       paths:
       - path: /
