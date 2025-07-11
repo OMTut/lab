@@ -4,11 +4,5 @@ resources:
   - namespace.yaml
   - helm-repository.yaml
   - helm-release.yaml
-
-patchesJson6902:
-  - target:
-      version: v1
-      kind: Ingress
-      name: plane-ingress
-      namespace: plane
-    path: remove-ingress-class.json
+  - ingress-fix-rbac.yaml
+  - ingress-fix-job.yaml

@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: plane-ingress-fixer
+  namespace: plane
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: plane
+  name: plane-ingress-fixer
+rules:
+- apiGroups: ["networking.k8s.io"]
+  resources: ["ingresses"]
+  verbs: ["get", "patch", "update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: plane-ingress-fixer
+  namespace: plane
+subjects:
+- kind: ServiceAccount
+  name: plane-ingress-fixer
+  namespace: plane
+roleRef:
+  kind: Role
+  name: plane-ingress-fixer
+  apiGroup: rbac.authorization.k8s.io

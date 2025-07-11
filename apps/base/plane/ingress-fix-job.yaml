@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: plane-ingress-fix
+  namespace: plane
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      serviceAccountName: plane-ingress-fixer
+      restartPolicy: OnFailure
+      containers:
+      - name: kubectl
+        image: bitnami/kubectl:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          echo "Waiting for plane ingress to be created..."
+          while ! kubectl get ingress plane-ingress -n plane >/dev/null 2>&1; do
+            echo "Waiting for ingress..."
+            sleep 5
+          done
+          
+          echo "Removing nginx ingressClassName..."
+          kubectl patch ingress plane-ingress -n plane --type=json -p='[{"op": "remove", "path": "/spec/ingressClassName"}]' || true
+          
+          echo "Adding Traefik annotations..."
+          kubectl annotate ingress plane-ingress -n plane \
+            traefik.ingress.kubernetes.io/router.entrypoints=websecure --overwrite
+          kubectl annotate ingress plane-ingress -n plane \
+            traefik.ingress.kubernetes.io/router.tls=true --overwrite
+          
+          echo "Ingress fixed successfully!"
+          kubectl get ingress plane-ingress -n plane
