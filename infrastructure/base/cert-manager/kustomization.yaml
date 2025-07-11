@@ -10,3 +10,4 @@ resources:
   - cert-traefik.yaml
   - cert-grafana.yaml
   - cert-minio.yaml
+  - cert-plane.yaml
