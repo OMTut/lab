@@ -29,8 +29,6 @@ spec:
       host: plane.wc
     postgresql:
       enabled: false
-    postgres:
-      enabled: false
       host: postgres-arasaka-postgresql.database-arasaka.svc.cluster.local
       port: 5432
       database:
