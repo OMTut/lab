@@ -6,3 +6,5 @@ resources:
   - helm-release.yaml
   - ingress-fix-rbac.yaml
   - ingress-fix-job.yaml
+  - database-fix-rbac.yaml
+  - database-fix-job.yaml

@@ -1,0 +1,51 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: plane-database-fix
+  namespace: plane
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      serviceAccountName: plane-database-fixer
+      restartPolicy: OnFailure
+      containers:
+      - name: kubectl
+        image: bitnami/kubectl:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          echo "Waiting for plane-app-secrets to be created..."
+          while ! kubectl get secret plane-app-secrets -n plane >/dev/null 2>&1; do
+            echo "Waiting for app secrets..."
+            sleep 5
+          done
+          
+          echo "Getting external database credentials..."
+          POSTGRES_USER=$(kubectl get secret plane-secret -n plane -o jsonpath='{.data.POSTGRES_USER}' | base64 -d)
+          POSTGRES_PASSWORD=$(kubectl get secret plane-secret -n plane -o jsonpath='{.data.POSTGRES_PASSWORD}' | base64 -d)
+          POSTGRES_DB=$(kubectl get secret plane-secret -n plane -o jsonpath='{.data.POSTGRES_DB}' | base64 -d)
+          SECRET_KEY=$(kubectl get secret plane-secret -n plane -o jsonpath='{.data.SECRET_KEY}' | base64 -d)
+          
+          # URL encode the password for safety
+          ENCODED_PASSWORD=$(echo -n "$POSTGRES_PASSWORD" | sed 's/@/%40/g; s/:/%3A/g; s/\//%2F/g; s/ /%20/g')
+          
+          # Construct external database URL
+          EXTERNAL_DB_URL="postgresql://${POSTGRES_USER}:${ENCODED_PASSWORD}@postgres-arasaka-postgresql.database-arasaka.svc.cluster.local:5432/${POSTGRES_DB}"
+          
+          echo "Updating plane-app-secrets with external database..."
+          kubectl patch secret plane-app-secrets -n plane --type=json -p="[
+            {\"op\": \"replace\", \"path\": \"/data/DATABASE_URL\", \"value\": \"$(echo -n "$EXTERNAL_DB_URL" | base64 -w 0)\"},
+            {\"op\": \"replace\", \"path\": \"/data/SECRET_KEY\", \"value\": \"$(echo -n "$SECRET_KEY" | base64 -w 0)\"}
+          ]"
+          
+          echo "Restarting plane API pods to pick up new database config..."
+          kubectl rollout restart deployment/plane-api-wl -n plane
+          kubectl rollout restart deployment/plane-beat-worker-wl -n plane
+          kubectl rollout restart deployment/plane-worker-wl -n plane
+          
+          echo "Database configuration updated successfully!"
+          echo "New DATABASE_URL: $EXTERNAL_DB_URL"
