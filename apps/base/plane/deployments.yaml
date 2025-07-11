@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: plane-web
-        image: makeplane/plane-frontend:latest
+        image: makeplane/plane-frontend:0.23.1
         command: ["sh", "-c", "npm install -g turbo && npm start"]
         ports:
         - containerPort: 3000
