@@ -27,6 +27,8 @@ spec:
             - plane.wc
           secretName: plane-tls
       host: plane.wc
+    postgresql:
+      enabled: false
     postgres:
       enabled: false
       host: postgres-arasaka-postgresql.database-arasaka.svc.cluster.local
