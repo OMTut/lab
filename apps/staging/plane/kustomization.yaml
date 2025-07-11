@@ -4,5 +4,3 @@ namespace: plane
 resources:
   - ../../base/plane
   - plane-secret.yaml
-patchesStrategicMerge:
-  - helm-repository-patch.yaml

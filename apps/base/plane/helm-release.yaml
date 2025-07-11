@@ -12,7 +12,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: plane
-        namespace: flux-system
+        namespace: plane
   values:
     ingress:
       enabled: true
