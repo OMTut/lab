@@ -11,4 +11,9 @@ spec:
       targetPort: 8123
       protocol: TCP
       nodePort: 30123
+    - name: homekit
+      port: 21063
+      targetPort: 21063
+      protocol: TCP
+      nodePort: 30063
   type: NodePort
