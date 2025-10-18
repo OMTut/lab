@@ -15,7 +15,7 @@ spec:
         namespace: plane
   values:
     ingress:
-      enabled: true
+      enabled: false
       ingressClassName: ""
       appHost: plane.wc
       annotations:
