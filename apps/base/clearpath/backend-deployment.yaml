@@ -17,6 +17,19 @@ spec:
         app: clearpath-backend
         component: backend
     spec:
+      dnsPolicy: "None"
+      dnsConfig:
+        nameservers:
+        - "1.1.1.1"
+        - "8.8.8.8"
+        searches:
+        - "clearpath.svc.cluster.local"
+        - "svc.cluster.local"
+        - "cluster.local"
+        options:
+        - name: "ndots"
+          value: "2"
+        - name: "edns0"
       containers:
       - name: backend
         image: ghcr.io/omtut/clearpath-backend:latest

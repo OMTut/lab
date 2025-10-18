@@ -40,10 +40,16 @@ spec:
       password:
         existingSecret: plane-secret
         existingSecretKey: POSTGRES_PASSWORD
+    persistence:
+      storageClass: "local-path"
+      size: 10Gi
+      accessMode: ReadWriteOnce
     redis:
-      enabled: false
-      host: plane-redis
-      port: 6379
+      enabled: true
+      persistence:
+        enabled: true
+        storageClass: "local-path"
+        size: 1Gi
     secretKey:
       existingSecret: plane-secret
       existingSecretKey: SECRET_KEY
