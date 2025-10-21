@@ -33,14 +33,45 @@ spec:
           # URL encode the password for safety
           ENCODED_PASSWORD=$(echo -n "$POSTGRES_PASSWORD" | sed 's/@/%40/g; s/:/%3A/g; s/\//%2F/g; s/ /%20/g')
           
+          # Get database host - try hostname first, fall back to IP if DNS fails
+          DB_HOST="postgres-arasaka-postgresql.database-arasaka.svc.cluster.local"
+          echo "Testing DNS resolution for $DB_HOST..."
+          
+          # Test if we can resolve the hostname - use timeout to avoid hanging
+          if ! timeout 10 nslookup "$DB_HOST" >/dev/null 2>&1; then
+            echo "DNS resolution failed, attempting to get service IP..."
+            DB_IP=$(kubectl get service postgres-arasaka-postgresql -n database-arasaka -o jsonpath='{.spec.clusterIP}' 2>/dev/null || echo "")
+            if [ -n "$DB_IP" ] && [ "$DB_IP" != "None" ]; then
+              DB_HOST="$DB_IP"
+              echo "Using database service IP: $DB_HOST"
+            else
+              echo "Could not resolve database service IP, trying endpoints..."
+              DB_IP=$(kubectl get endpoints postgres-arasaka-postgresql -n database-arasaka -o jsonpath='{.subsets[0].addresses[0].ip}' 2>/dev/null || echo "")
+              if [ -n "$DB_IP" ]; then
+                DB_HOST="$DB_IP"
+                echo "Using database endpoint IP: $DB_HOST"
+              else
+                echo "Warning: Could not resolve database IP, using original hostname"
+              fi
+            fi
+          else
+            echo "DNS resolution successful for $DB_HOST"
+          fi
+          
           # Construct external database URL
-          EXTERNAL_DB_URL="postgresql://${POSTGRES_USER}:${ENCODED_PASSWORD}@postgres-arasaka-postgresql.database-arasaka.svc.cluster.local:5432/${POSTGRES_DB}"
+          EXTERNAL_DB_URL="postgresql://${POSTGRES_USER}:${ENCODED_PASSWORD}@${DB_HOST}:5432/${POSTGRES_DB}"
           
           echo "Updating plane-app-secrets with external database..."
           kubectl patch secret plane-app-secrets -n plane --type=json -p="[
             {\"op\": \"replace\", \"path\": \"/data/DATABASE_URL\", \"value\": \"$(echo -n "$EXTERNAL_DB_URL" | base64 -w 0)\"},
             {\"op\": \"replace\", \"path\": \"/data/SECRET_KEY\", \"value\": \"$(echo -n "$SECRET_KEY" | base64 -w 0)\"}
           ]"
+          
+          echo "Scaling down embedded PostgreSQL (using external Arasaka DB instead)..."
+          kubectl scale statefulset plane-pgdb-wl --replicas=0 -n plane 2>/dev/null || echo "No embedded PostgreSQL to scale down"
+          
+          echo "Waiting for embedded databases to scale down..."
+          sleep 10
           
           echo "Restarting plane API pods to pick up new database config..."
           kubectl rollout restart deployment/plane-api-wl -n plane
@@ -49,3 +80,9 @@ spec:
           
           echo "Database configuration updated successfully!"
           echo "New DATABASE_URL: $EXTERNAL_DB_URL"
+          
+          echo "Waiting for deployments to be ready..."
+          kubectl wait --for=condition=available --timeout=300s deployment/plane-api-wl -n plane
+          kubectl wait --for=condition=available --timeout=300s deployment/plane-worker-wl -n plane
+          
+          echo "All deployments are ready and using external Arasaka database!"
