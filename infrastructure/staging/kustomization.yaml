@@ -12,3 +12,4 @@ resources:
   - ../base/minio/
   - ../base/cert-manager/
   - ../base/traefik/
+  - ../base/coredns/

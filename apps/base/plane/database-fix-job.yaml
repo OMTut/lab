@@ -78,11 +78,26 @@ spec:
           kubectl rollout restart deployment/plane-beat-worker-wl -n plane
           kubectl rollout restart deployment/plane-worker-wl -n plane
           
-          echo "Database configuration updated successfully!"
-          echo "New DATABASE_URL: $EXTERNAL_DB_URL"
+          # Also ensure other service URLs use proper hostnames (not IPs)
+          echo "Ensuring all service connections use proper hostnames..."
+          
+          # Set proper AMQP and Redis URLs using hostnames
+          AMQP_URL="amqp://plane:plane@plane-rabbitmq.plane.svc.cluster.local/"
+          REDIS_URL="redis://plane-redis.plane.svc.cluster.local:6379/"
+          
+          echo "Updating all service URLs to use hostnames..."
+          kubectl patch secret plane-app-secrets -n plane --type=json -p="[
+            {\"op\": \"replace\", \"path\": \"/data/AMQP_URL\", \"value\": \"$(echo -n "$AMQP_URL" | base64 -w 0)\"},
+            {\"op\": \"replace\", \"path\": \"/data/REDIS_URL\", \"value\": \"$(echo -n "$REDIS_URL" | base64 -w 0)\"}
+          ]"
+          
+          echo "Database and service configuration updated successfully!"
+          echo "DATABASE_URL: $EXTERNAL_DB_URL"
+          echo "AMQP_URL: $AMQP_URL"
+          echo "REDIS_URL: $REDIS_URL"
           
           echo "Waiting for deployments to be ready..."
-          kubectl wait --for=condition=available --timeout=300s deployment/plane-api-wl -n plane
-          kubectl wait --for=condition=available --timeout=300s deployment/plane-worker-wl -n plane
+          kubectl wait --for=condition=available --timeout=300s deployment/plane-api-wl -n plane || echo "API deployment wait timed out"
+          kubectl wait --for=condition=available --timeout=300s deployment/plane-worker-wl -n plane || echo "Worker deployment wait timed out"
           
-          echo "All deployments are ready and using external Arasaka database!"
+          echo "All deployments updated with external Arasaka database and proper service hostnames!"

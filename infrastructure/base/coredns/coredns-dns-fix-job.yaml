@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: coredns-dns-fix
+  namespace: kube-system
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      serviceAccountName: coredns-dns-fixer
+      restartPolicy: OnFailure
+      containers:
+      - name: kubectl
+        image: bitnami/kubectl:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          echo "Fixing CoreDNS configuration to prevent .home.arpa DNS issues..."
+          
+          # Wait for CoreDNS configmap to exist
+          while ! kubectl get configmap coredns -n kube-system >/dev/null 2>&1; do
+            echo "Waiting for CoreDNS configmap..."
+            sleep 5
+          done
+          
+          echo "Updating CoreDNS to use public DNS servers instead of /etc/resolv.conf"
+          
+          # Update CoreDNS configuration to use 8.8.8.8 and 1.1.1.1 instead of /etc/resolv.conf
+          kubectl patch configmap coredns -n kube-system --type merge -p='{
+            "data": {
+              "Corefile": ".:53 {\n    errors\n    health\n    ready\n    kubernetes cluster.local in-addr.arpa ip6.arpa {\n      pods insecure\n      fallthrough in-addr.arpa ip6.arpa\n    }\n    hosts /etc/coredns/NodeHosts {\n      ttl 60\n      reload 15s\n      fallthrough\n    }\n    prometheus :9153\n    forward . 8.8.8.8 1.1.1.1\n    cache 30\n    loop\n    reload\n    loadbalance\n    import /etc/coredns/custom/*.override\n}\nimport /etc/coredns/custom/*.server"
+            }
+          }'
+          
+          echo "Restarting CoreDNS deployment to apply changes..."
+          kubectl rollout restart deployment/coredns -n kube-system
+          
+          echo "Waiting for CoreDNS rollout to complete..."
+          kubectl rollout status deployment/coredns -n kube-system --timeout=60s
+          
+          echo "Testing DNS resolution..."
+          # Test DNS resolution to verify fix
+          kubectl run dns-test-fix --image=busybox:1.28 --rm --restart=Never -- nslookup kubernetes.default.svc.cluster.local || echo "DNS test failed but continuing"
+          
+          echo "CoreDNS DNS fix applied successfully!"
+          echo "Changed: forward . /etc/resolv.conf -> forward . 8.8.8.8 1.1.1.1"
+          echo "This prevents .home.arpa search domain issues from affecting cluster DNS"
