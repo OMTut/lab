@@ -46,3 +46,17 @@ spec:
                     port: 80
             tls:
               secretName: grafana-tls-secret
+        - apiVersion: traefik.containo.us/v1alpha1
+          kind: IngressRoute
+          metadata:
+            name: grafana-local
+            namespace: monitoring
+          spec:
+            entryPoints:
+              - web
+            routes:
+              - match: Host(`grafana.wc`)
+                kind: Rule
+                services:
+                  - name: kube-prometheus-stack-grafana
+                    port: 80
