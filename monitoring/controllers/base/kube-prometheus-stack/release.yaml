@@ -59,7 +59,9 @@ spec:
             namespace: monitoring
           spec:
             entryPoints:
-              - web
+              - websecure
+            tls:
+              secretName: grafana-wc-tls
             routes:
               - match: Host(`grafana.wc`)
                 kind: Rule
