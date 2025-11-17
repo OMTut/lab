@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - homarr-secret.yaml
+  - homarr-auth-secret.yaml
   - helm-repository.yaml
   - helm-release.yaml
   - ingress.yaml
