@@ -15,7 +15,7 @@ spec:
         namespace: homarr
   values:
     image:
-      tag: "1.0.0"  # Use stable 1.0 release instead of early-adopters
+      tag: "latest"  # Use latest stable release
     
     env:
       TZ: "America/Chicago"
