@@ -1,0 +1,44 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: homarr
+  namespace: homarr
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: homarr
+      version: "0.1.x"  # Use latest 0.1.x version
+      sourceRef:
+        kind: HelmRepository
+        name: homarr-labs
+        namespace: homarr
+  values:
+    env:
+      TZ: "America/Chicago"
+      BASE_URL: "https://homarr.wc"
+    
+    service:
+      main:
+        ports:
+          http:
+            port: 7575
+    
+    persistence:
+      config:
+        enabled: true
+        storageClass: "local-path"
+        size: 1Gi
+        accessMode: ReadWriteOnce
+    
+    ingress:
+      main:
+        enabled: false  # Using Traefik IngressRoute instead
+    
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
