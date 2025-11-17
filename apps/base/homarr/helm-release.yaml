@@ -16,24 +16,32 @@ spec:
   values:
     env:
       TZ: "America/Chicago"
-      BASE_URL: "https://homarr.wc"
     
     service:
-      main:
-        ports:
-          http:
-            port: 7575
+      enabled: true
+      type: ClusterIP
+      ports:
+        app:
+          port: 7575
+          targetPort: http
+          protocol: TCP
     
     persistence:
-      config:
+      homarrDatabase:
         enabled: true
-        storageClass: "local-path"
-        size: 1Gi
-        accessMode: ReadWriteOnce
+        storageClassName: "local-path"
+        accessMode: "ReadWriteOnce"
+        size: "1Gi"
+        mountPath: "/appdata/db"
+      homarrImages:
+        enabled: true
+        storageClassName: "local-path"
+        accessMode: "ReadWriteOnce"
+        size: "1Gi"
+        mountPath: "/images"
     
     ingress:
-      main:
-        enabled: false  # Using Traefik IngressRoute instead
+      enabled: false  # Using Traefik IngressRoute instead
     
     resources:
       requests:
