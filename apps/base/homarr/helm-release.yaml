@@ -14,6 +14,9 @@ spec:
         name: homarr-labs
         namespace: homarr
   values:
+    image:
+      tag: "1.0.0"  # Use stable 1.0 release instead of early-adopters
+    
     env:
       TZ: "America/Chicago"
       AUTH_PROVIDERS: "credentials"
