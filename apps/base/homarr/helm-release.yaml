@@ -8,18 +8,14 @@ spec:
   chart:
     spec:
       chart: homarr
-      version: "0.1.x"  # Use latest 0.1.x version
+      version: "7.x.x"  # Use stable 1.43.x chart version
       sourceRef:
         kind: HelmRepository
         name: homarr-labs
         namespace: homarr
   values:
-    image:
-      tag: "latest"  # Use latest stable release
-    
     env:
       TZ: "America/Chicago"
-      AUTH_PROVIDERS: "credentials"
     
     service:
       enabled: true
