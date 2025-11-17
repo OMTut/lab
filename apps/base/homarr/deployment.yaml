@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: homarr
-        image: ghcr.io/ajnart/homarr:0.16.0
+        image: ghcr.io/ajnart/homarr:latest
         env:
         - name: BASE_URL
           value: "https://homarr.wc"
