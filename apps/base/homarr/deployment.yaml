@@ -22,12 +22,10 @@ spec:
         env:
         - name: BASE_URL
           value: "https://homarr.wc"
-        - name: DATABASE_URL
-          value: "file:/app/data/db.sqlite"
         ports:
           - containerPort: 7575
         volumeMounts:
-        - mountPath: /app/data
+        - mountPath: /data
           name: homarr-data
       volumes:
       - name: homarr-data
