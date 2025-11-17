@@ -16,6 +16,7 @@ spec:
   values:
     env:
       TZ: "America/Chicago"
+      AUTH_PROVIDERS: "credentials"
     
     service:
       enabled: true
