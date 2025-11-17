@@ -22,8 +22,12 @@ spec:
           - |
             rm -rf /app/data
             ln -s /mnt/data /app/data
-            cd /app
-            node server.js
+            echo "Exporting hostname..."
+            export HOSTNAME=$(hostname)
+            echo "Migrating database..."
+            cd /app && yarn db:migrate
+            echo "Starting production server..."
+            cd /app && node server.js
         env:
         - name: BASE_URL
           value: "https://homarr.wc"
