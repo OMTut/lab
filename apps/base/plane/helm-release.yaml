@@ -59,10 +59,5 @@ spec:
       NEXT_PUBLIC_API_BASE_URL: "https://plane.wc"
       NEXT_PUBLIC_DEPLOY_URL: "https://plane.wc"
     worker:
-      resources:
-        limits:
-          cpu: 500m
-          memory: 2Gi
-        requests:
-          cpu: 100m
-          memory: 500Mi
+      memoryLimit: 2Gi
+      memoryRequest: 500Mi
