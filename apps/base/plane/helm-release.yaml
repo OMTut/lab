@@ -3,6 +3,8 @@ kind: HelmRelease
 metadata:
   name: plane
   namespace: plane
+  annotations:
+    reconcile.fluxcd.io/requestedAt: "2025-12-05T17:17:00Z"
 spec:
   interval: 5m
   chart:
