@@ -13,6 +13,10 @@ spec:
       labels:
         app: bar-assistant
     spec:
+      securityContext:
+        fsGroup: 82
+        runAsUser: 82
+        runAsNonRoot: true
       initContainers:
         - name: init-db
           image: busybox:1.36
