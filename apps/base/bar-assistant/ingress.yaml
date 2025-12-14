@@ -9,6 +9,11 @@ spec:
   tls:
     secretName: bar-assistant-tls
   routes:
+    - match: Host(`mixitup.wc`) && PathPrefix(`/api`)
+      kind: Rule
+      services:
+        - name: bar-assistant-service
+          port: 8080
     - match: Host(`mixitup.wc`)
       kind: Rule
       services:

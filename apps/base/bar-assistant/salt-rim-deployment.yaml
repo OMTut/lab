@@ -20,7 +20,7 @@ spec:
             - containerPort: 8080
           env:
             - name: API_URL
-              value: http://bar-assistant-service.bar-assistant.svc.cluster.local:8080
+              value: https://mixitup.wc/api
 ---
 apiVersion: v1
 kind: Service
