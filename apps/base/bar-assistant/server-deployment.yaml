@@ -13,6 +13,21 @@ spec:
       labels:
         app: bar-assistant
     spec:
+      initContainers:
+        - name: init-db
+          image: busybox:1.36
+          command: ["sh","-c"]
+          args:
+            - |
+              set -e
+              mkdir -p /var/www/html/storage/database
+              if [ ! -f /var/www/html/storage/database/database.sqlite ]; then
+                touch /var/www/html/storage/database/database.sqlite
+              fi
+              chmod 664 /var/www/html/storage/database/database.sqlite || true
+          volumeMounts:
+            - name: bar-assistant-data
+              mountPath: /var/www/html/storage
       containers:
         - name: server
           image: barassistant/server:v5
@@ -23,6 +38,10 @@ spec:
               value: America/Chicago
             - name: APP_URL
               value: https://mixitup.wc
+            - name: DB_CONNECTION
+              value: sqlite
+            - name: DB_DATABASE
+              value: /var/www/html/storage/database/database.sqlite
             - name: MEILISEARCH_HOST
               value: http://meilisearch-service.bar-assistant.svc.cluster.local:7700
             - name: MEILISEARCH_KEY
