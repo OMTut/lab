@@ -20,7 +20,7 @@ spec:
             - containerPort: 8080
           env:
             - name: API_URL
-              value: https://mixitup.wc/api
+              value: https://mixitup.wc
 ---
 apiVersion: v1
 kind: Service
