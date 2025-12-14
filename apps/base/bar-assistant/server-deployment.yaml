@@ -20,7 +20,14 @@ spec:
           args:
             - |
               set -e
-              mkdir -p /storage/database /storage/app/public /storage/bar-assistant/uploads /storage/temp
+              mkdir -p /storage/database \
+                       /storage/app/public \
+                       /storage/bar-assistant/uploads \
+                       /storage/temp \
+                       /storage/framework/cache \
+                       /storage/framework/sessions \
+                       /storage/framework/views \
+                       /storage/logs
               chown -R 33:33 /storage
               chmod -R 775 /storage
           volumeMounts:
