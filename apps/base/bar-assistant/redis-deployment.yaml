@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: bar-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          args:
+            - "--appendonly"
+            - "yes"
+            - "--requirepass"
+            - "$(REDIS_PASSWORD)"
+          ports:
+            - containerPort: 6379
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bar-assistant-secret
+                  key: REDIS_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: bar-assistant
+spec:
+  selector:
+    app: redis
+  ports:
+    - name: tcp
+      port: 6379
+      targetPort: 6379
+  type: ClusterIP

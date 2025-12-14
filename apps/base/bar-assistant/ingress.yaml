@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: bar-assistant
+  namespace: bar-assistant
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: bar-assistant-tls
+  routes:
+    - match: Host(`mixitup.wc`)
+      kind: Rule
+      services:
+        - name: salt-rim-service
+          port: 8080

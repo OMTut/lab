@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: salt-rim
+  namespace: bar-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: salt-rim
+  template:
+    metadata:
+      labels:
+        app: salt-rim
+    spec:
+      containers:
+        - name: salt-rim
+          image: barassistant/salt-rim:v4
+          ports:
+            - containerPort: 8080
+          env:
+            - name: API_URL
+              value: http://bar-assistant-service.bar-assistant.svc.cluster.local:8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: salt-rim-service
+  namespace: bar-assistant
+spec:
+  selector:
+    app: salt-rim
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP

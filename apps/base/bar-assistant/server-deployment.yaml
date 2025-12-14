@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bar-assistant
+  namespace: bar-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bar-assistant
+  template:
+    metadata:
+      labels:
+        app: bar-assistant
+    spec:
+      containers:
+        - name: server
+          image: barassistant/server:v5
+          ports:
+            - containerPort: 8080
+          env:
+            - name: TZ
+              value: America/Chicago
+            - name: APP_URL
+              value: https://mixitup.wc
+            - name: MEILISEARCH_HOST
+              value: http://meilisearch-service.bar-assistant.svc.cluster.local:7700
+            - name: MEILISEARCH_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: bar-assistant-secret
+                  key: MEILI_MASTER_KEY
+            - name: APP_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: bar-assistant-secret
+                  key: APP_KEY
+            - name: CACHE_DRIVER
+              value: redis
+            - name: SESSION_DRIVER
+              value: redis
+            - name: REDIS_HOST
+              value: redis-service
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bar-assistant-secret
+                  key: REDIS_PASSWORD
+          volumeMounts:
+            - name: bar-assistant-data
+              mountPath: /var/www/html/storage
+      volumes:
+        - name: bar-assistant-data
+          persistentVolumeClaim:
+            claimName: bar-assistant-data-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bar-assistant-service
+  namespace: bar-assistant
+spec:
+  selector:
+    app: bar-assistant
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
