@@ -1,4 +1,14 @@
 apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: meilisearch-stripprefix
+  namespace: bar-assistant
+spec:
+  stripPrefix:
+    prefixes:
+      - /search
+---
+apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: bar-assistant
@@ -14,6 +24,13 @@ spec:
       services:
         - name: bar-assistant-service
           port: 8080
+    - match: Host(`mixitup.wc`) && PathPrefix(`/search`)
+      kind: Rule
+      middlewares:
+        - name: meilisearch-stripprefix
+      services:
+        - name: meilisearch-service
+          port: 7700
     - match: Host(`mixitup.wc`)
       kind: Rule
       services:

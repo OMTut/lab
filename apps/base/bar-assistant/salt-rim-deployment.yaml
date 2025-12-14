@@ -21,6 +21,8 @@ spec:
           env:
             - name: API_URL
               value: https://mixitup.wc
+            - name: MEILISEARCH_URL
+              value: https://mixitup.wc/search
 ---
 apiVersion: v1
 kind: Service
