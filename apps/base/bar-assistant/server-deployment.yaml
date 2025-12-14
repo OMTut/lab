@@ -20,12 +20,12 @@ spec:
           args:
             - |
               set -e
-              mkdir -p /var/www/html/storage/database
-              chown -R 33:33 /var/www/html/storage
-              chmod -R 775 /var/www/html/storage
+              mkdir -p /storage/database /storage/app/public /storage/bar-assistant/uploads /storage/temp
+              chown -R 33:33 /storage
+              chmod -R 775 /storage
           volumeMounts:
             - name: bar-assistant-data
-              mountPath: /var/www/html/storage
+              mountPath: /storage
       containers:
         - name: server
           image: barassistant/server:v5
@@ -41,7 +41,7 @@ spec:
             - name: DB_CONNECTION
               value: sqlite
             - name: DB_DATABASE
-              value: /var/www/html/storage/database/database.sqlite
+              value: /var/www/cocktails/storage/database/database.sqlite
             - name: MEILISEARCH_HOST
               value: http://meilisearch-service.bar-assistant.svc.cluster.local:7700
             - name: MEILISEARCH_KEY
@@ -69,7 +69,7 @@ spec:
                   key: REDIS_PASSWORD
           volumeMounts:
             - name: bar-assistant-data
-              mountPath: /var/www/html/storage
+              mountPath: /var/www/cocktails/storage
       volumes:
         - name: bar-assistant-data
           persistentVolumeClaim:
