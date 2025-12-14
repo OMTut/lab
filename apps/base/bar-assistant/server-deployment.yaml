@@ -24,7 +24,8 @@ spec:
               if [ ! -f /var/www/html/storage/database/database.sqlite ]; then
                 touch /var/www/html/storage/database/database.sqlite
               fi
-              chmod 664 /var/www/html/storage/database/database.sqlite || true
+              chown -R 82:82 /var/www/html/storage
+              chmod -R 775 /var/www/html/storage
           volumeMounts:
             - name: bar-assistant-data
               mountPath: /var/www/html/storage
