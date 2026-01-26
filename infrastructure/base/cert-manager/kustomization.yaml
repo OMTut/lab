@@ -13,3 +13,4 @@ resources:
   - cert-minio.yaml
   - cert-plane.yaml
   - cert-bar-assistant.yaml
+  - cert-nextcloud.yaml

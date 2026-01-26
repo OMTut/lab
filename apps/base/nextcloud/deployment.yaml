@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud
+  namespace: nextcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nextcloud
+  template:
+    metadata:
+      labels:
+        app: nextcloud
+    spec:
+      containers:
+      - name: nextcloud
+        image: nextcloud:30
+        ports:
+        - containerPort: 80
+        env:
+        - name: NEXTCLOUD_TRUSTED_DOMAINS
+          value: "nextcloud.wc"
+        - name: OVERWRITEPROTOCOL
+          value: "https"
+        - name: OVERWRITEHOST
+          value: "nextcloud.wc"
+        - name: TZ
+          value: "America/Chicago"
+        volumeMounts:
+        - name: nextcloud-data
+          mountPath: /var/www/html
+        resources:
+          limits:
+            memory: "2Gi"
+          requests:
+            memory: "512Mi"
+      volumes:
+      - name: nextcloud-data
+        persistentVolumeClaim:
+          claimName: nextcloud-data-pvc
