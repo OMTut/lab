@@ -18,6 +18,7 @@ metadata:
   name: nextcloud-data-pvc
   namespace: nextcloud
 spec:
+  storageClassName: ""
   accessModes:
     - ReadWriteMany
   resources:
