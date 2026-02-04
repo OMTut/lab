@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homarr
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: homarr
+  template:
+    metadata:
+      labels:
+        app: homarr
+    spec:
+      containers:
+      - name: homarr
+        image: ghcr.io/homarr-labs/homarr:latest
+        ports:
+        - containerPort: 7575
+        env:
+        - name: TZ
+          value: "America/Chicago"
+        - name: SECRET_ENCRYPTION_KEY
+          valueFrom:
+            secretKeyRef:
+              name: homarr-secret
+              key: SECRET_ENCRYPTION_KEY
+        volumeMounts:
+        - name: homarr-data
+          mountPath: /appdata
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+      volumes:
+      - name: homarr-data
+        persistentVolumeClaim:
+          claimName: homarr-data-pvc
