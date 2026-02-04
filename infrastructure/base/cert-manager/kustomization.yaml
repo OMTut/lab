@@ -12,4 +12,3 @@ resources:
   - cert-grafana-wc.yaml
   - cert-minio.yaml
   - cert-plane.yaml
-  - cert-bar-assistant.yaml
