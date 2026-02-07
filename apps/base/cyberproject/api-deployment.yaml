@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cyberproject-api
+  template:
+    metadata:
+      labels:
+        app: cyberproject-api
+    spec:
+      containers:
+        - name: api
+          image: cyberproject-api:v1
+          imagePullPolicy: Never  # Use locally imported image
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - secretRef:
+                name: api-env
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "2Gi"  # ML model needs memory
+              cpu: "1000m"

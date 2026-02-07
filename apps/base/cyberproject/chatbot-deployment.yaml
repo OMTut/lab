@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cyberproject-chatbot
+  template:
+    metadata:
+      labels:
+        app: cyberproject-chatbot
+    spec:
+      containers:
+        - name: chatbot
+          image: cyberproject-chatbot:v1
+          imagePullPolicy: Never  # Use locally imported image
+          ports:
+            - containerPort: 5173
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
