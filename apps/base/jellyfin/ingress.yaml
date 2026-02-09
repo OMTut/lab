@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jellyfin
+  namespace: jellyfin
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: jellyfin-tls
+  routes:
+    - match: Host(`jellyfin.wc`)
+      kind: Rule
+      services:
+        - name: jellyfin-service
+          port: 8096
