@@ -26,6 +26,10 @@ spec:
         target:
           kind: PrometheusRule
   values:
+    prometheus:
+      prometheusSpec:
+        retention: 5d        # Reduced from 10d to save memory
+        scrapeInterval: 60s  # Increased from 30s to reduce data points
     grafana:
       ingress:
         enabled: false
