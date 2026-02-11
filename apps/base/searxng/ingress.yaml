@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: searxng
+  namespace: searxng
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: searxng-tls
+  routes:
+    - match: Host(`searxng.wc`)
+      kind: Rule
+      services:
+        - name: searxng
+          port: 8080
