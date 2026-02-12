@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: headscale-config
+data:
+  config.yaml: |
+    # Headscale server URL - this is what clients will connect to
+    server_url: https://tavern.friartut.com
+
+    # Address to listen on
+    listen_addr: 0.0.0.0:8080
+
+    # Address for metrics (optional)
+    metrics_listen_addr: 0.0.0.0:9090
+
+    # gRPC settings for CLI access
+    grpc_listen_addr: 0.0.0.0:50443
+    grpc_allow_insecure: false
+
+    # Private key paths (will be auto-generated on first run)
+    private_key_path: /var/lib/headscale/private.key
+    noise:
+      private_key_path: /var/lib/headscale/noise_private.key
+
+    # IP ranges for your tailnet
+    prefixes:
+      v4: 100.64.0.0/10
+      v6: fd7a:115c:a1e0::/48
+      allocation: random
+
+    # DERP (relay) configuration - use Tailscale's public servers
+    derp:
+      server:
+        enabled: false
+      urls:
+        - https://controlplane.tailscale.com/derpmap/default
+      auto_update_enabled: true
+      update_frequency: 24h
+
+    # Disable automatic check for headscale updates
+    disable_check_updates: true
+
+    # Ephemeral node settings
+    ephemeral_node_inactivity_timeout: 30m
+
+    # Database configuration (SQLite)
+    database:
+      type: sqlite
+      sqlite:
+        path: /var/lib/headscale/db.sqlite
+
+    # Logging
+    log:
+      format: text
+      level: info
+
+    # DNS configuration
+    dns:
+      magic_dns: true
+      base_domain: friartut.tailnet
+      nameservers:
+        global:
+          - 1.1.1.1
+          - 8.8.8.8
+
+    # Disable sending telemetry to Tailscale
+    logtail:
+      enabled: false
+
+    # Policy/ACL - allow all by default (you can restrict later)
+    policy:
+      mode: file
+      path: ""
