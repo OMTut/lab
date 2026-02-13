@@ -6,6 +6,10 @@ metadata:
   name: nextcloud-service
   namespace: nextcloud
 spec:
+  template:
+    spec:
+      securityContext:
+        fsGroup: 33
   ports:
   - port: 80
     protocol: TCP
