@@ -3,5 +3,5 @@ kind: Kustomization
 namespace: headscale
 resources:
   #- ../../base/headscale
-  - cloudflare.yaml
-  - cloudflare-secret.yaml
+  #- cloudflare.yaml
+  #- cloudflare-secret.yaml
