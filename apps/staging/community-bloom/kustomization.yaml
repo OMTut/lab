@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: community-bloom
+
+resources:
+  - ../../base/community-bloom
+  - community-bloom-secret.yaml
+  - mariadb-secret.yaml
+  - cloudflare.yaml
+  - community-bloom-tunnel-credentials.yaml

@@ -1,0 +1,82 @@
+# Cloudflare tunnel for external access at community-bloom.hondo-dev.com
+#
+# Before this will work you need to:
+# 1. Create a new tunnel in the Cloudflare dashboard (Zero Trust → Networks → Tunnels)
+# 2. Replace TUNNEL-ID-PLACEHOLDER below with the tunnel UUID
+# 3. Download the tunnel credentials JSON, save it as:
+#      apps/staging/community-bloom/community-bloom-tunnel-credentials.yaml
+#    in the format:
+#      apiVersion: v1
+#      kind: Secret
+#      metadata:
+#        name: community-bloom-tunnel-credentials
+#        namespace: community-bloom
+#      stringData:
+#        credentials.json: '<paste credentials JSON here>'
+#    Then SOPS-encrypt it:
+#      sops --encrypt --in-place apps/staging/community-bloom/community-bloom-tunnel-credentials.yaml
+# 4. Add community-bloom-tunnel-credentials.yaml to the resources list in kustomization.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudflared
+  namespace: community-bloom
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cloudflared
+  template:
+    metadata:
+      labels:
+        app: cloudflared
+    spec:
+      containers:
+        - name: cloudflared
+          image: cloudflare/cloudflared:latest
+          args:
+            - tunnel
+            - --config
+            - /etc/cloudflared/config/config.yaml
+            - run
+          livenessProbe:
+            httpGet:
+              path: /ready
+              port: 2000
+            failureThreshold: 1
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          volumeMounts:
+            - name: config
+              mountPath: /etc/cloudflared/config
+              readOnly: true
+            - name: creds
+              mountPath: /etc/cloudflared/creds
+              readOnly: true
+      volumes:
+        - name: creds
+          secret:
+            secretName: community-bloom-tunnel-credentials
+        - name: config
+          configMap:
+            name: cloudflared
+            items:
+              - key: config.yaml
+                path: config.yaml
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared
+  namespace: community-bloom
+data:
+  config.yaml: |
+    tunnel: 3df29f9b-d5ee-4d6e-9736-d7e609de96fe
+    credentials-file: /etc/cloudflared/creds/credentials.json
+    metrics: 0.0.0.0:2000
+    no-autoupdate: true
+
+    ingress:
+      - hostname: community-bloom.hondo-dev.com
+        service: http://community-bloom-service.community-bloom.svc:80
+      - service: http_status:404

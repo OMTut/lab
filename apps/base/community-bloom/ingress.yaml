@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: community-bloom
+  namespace: community-bloom
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: community-bloom-tls
+  routes:
+    - match: Host(`community-bloom.wc`)
+      kind: Rule
+      services:
+        - name: community-bloom-service
+          port: 80

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: community-bloom-service
+  namespace: community-bloom
+  labels:
+    app: community-bloom
+spec:
+  type: ClusterIP
+  selector:
+    app: community-bloom
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      name: http
