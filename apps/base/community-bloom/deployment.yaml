@@ -54,12 +54,18 @@ spec:
             httpGet:
               path: /
               port: 80
+              httpHeaders:
+                - name: Host
+                  value: community-bloom.hondo-dev.com
             initialDelaySeconds: 30
             periodSeconds: 15
           readinessProbe:
             httpGet:
               path: /
               port: 80
+              httpHeaders:
+                - name: Host
+                  value: community-bloom.hondo-dev.com
             initialDelaySeconds: 10
             periodSeconds: 10
           resources:
