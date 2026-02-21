@@ -26,6 +26,8 @@ spec:
           mountPath: /config
         - name: jellyfin-media
           mountPath: /media
+        - name: jellyfin-cache
+          mountPath: /cache
         resources:
           limits:
             memory: "4Gi"
@@ -38,3 +40,6 @@ spec:
       - name: jellyfin-media
         persistentVolumeClaim:
           claimName: jellyfin-media-pvc
+      - name: jellyfin-cache
+        persistentVolumeClaim:
+          claimName: jellyfin-cache-pvc
