@@ -21,6 +21,10 @@ spec:
         env:
         - name: TZ
           value: "America/Chicago"
+        securityContext:
+          supplementalGroups:
+            - 44    # video group
+            - 993   # render group
         volumeMounts:
         - name: jellyfin-config
           mountPath: /config
@@ -28,6 +32,8 @@ spec:
           mountPath: /media
         - name: jellyfin-cache
           mountPath: /cache
+        - name: dri
+          mountPath: /dev/dri
         resources:
           limits:
             memory: "4Gi"
@@ -43,3 +49,6 @@ spec:
       - name: jellyfin-cache
         persistentVolumeClaim:
           claimName: jellyfin-cache-pvc
+      - name: dri
+        hostPath:
+          path: /dev/dri
