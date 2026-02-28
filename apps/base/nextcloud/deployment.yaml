@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nextcloud
-        image: nextcloud:33
+        image: nextcloud:32
         ports:
         - containerPort: 80
         env:
