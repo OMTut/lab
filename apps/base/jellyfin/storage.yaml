@@ -9,8 +9,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 192.168.1.191
-    path: /mnt/md1/jellyfin/config
+    server: 192.168.1.144
+    path: /mnt/datatank/jellyfin-config
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -37,8 +37,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 192.168.1.191
-    path: /mnt/md1/jellyfin/media
+    server: 192.168.1.144
+    path: /mnt/datatank/media
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
