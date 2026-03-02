@@ -13,6 +13,13 @@ spec:
       labels:
         app: jellyfin
     spec:
+      securityContext:
+        runAsUser: 3004
+        runAsGroup: 568
+        fsGroup: 568
+        supplementalGroups:
+          - 44    # video group
+          - 993   # render group
       containers:
       - name: jellyfin
         image: jellyfin/jellyfin:latest
@@ -21,10 +28,6 @@ spec:
         env:
         - name: TZ
           value: "America/Chicago"
-        securityContext:
-          supplementalGroups:
-            - 44    # video group
-            - 993   # render group
         volumeMounts:
         - name: jellyfin-config
           mountPath: /config
