@@ -9,8 +9,8 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 192.168.1.191
-    path: /mnt/md1/nextcloud
+    server: 192.168.1.144
+    path: /mnt/datatank/nextcloud
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
