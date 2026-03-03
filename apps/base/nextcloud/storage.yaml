@@ -8,6 +8,9 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - nolock
+    - nfsvers=3
   nfs:
     server: 192.168.1.144
     path: /mnt/datatank/nextcloud
