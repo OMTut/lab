@@ -27,6 +27,26 @@ spec:
           value: "nextcloud.wc"
         - name: TZ
           value: "America/Chicago"
+        - name: POSTGRES_HOST
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud-db-creds
+              key: db-host
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud-db-creds
+              key: db-name
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud-db-creds
+              key: db-user
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: nextcloud-db-creds
+              key: db-password
         volumeMounts:
         - name: nextcloud-data
           mountPath: /var/www/html
