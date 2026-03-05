@@ -28,9 +28,9 @@ spec:
         - name: TZ
           value: "America/Chicago"
         - name: TRUSTED_PROXIES
-          value: "10.42.0.0/16"
+          value: "10.42.0.0/16 10.43.0.0/16"
         - name: OVERWRITECONDADDR
-          value: "^10\\.42\\..*"
+          value: "^10\\.(42|43)\\..*"
         - name: POSTGRES_HOST
           valueFrom:
             secretKeyRef:
