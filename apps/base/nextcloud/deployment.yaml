@@ -27,6 +27,10 @@ spec:
           value: "nextcloud.wc"
         - name: TZ
           value: "America/Chicago"
+        - name: TRUSTED_PROXIES
+          value: "10.42.0.0/16"
+        - name: OVERWRITECONDADDR
+          value: "^10\\.42\\..*"
         - name: POSTGRES_HOST
           valueFrom:
             secretKeyRef:
