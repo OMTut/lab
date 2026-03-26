@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: weight-tracker-web
+  namespace: weight-tracker
+spec:
+  selector:
+    app: weight-tracker-web
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80

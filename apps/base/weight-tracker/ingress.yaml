@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: weight-tracker
+  namespace: weight-tracker
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: weight-tracker-tls
+  routes:
+    - match: Host(`heavydeets.tut`)
+      kind: Rule
+      services:
+        - name: weight-tracker-web
+          port: 80

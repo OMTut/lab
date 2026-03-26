@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weight-tracker-api
+  namespace: weight-tracker
+  labels:
+    app: weight-tracker-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weight-tracker-api
+  template:
+    metadata:
+      labels:
+        app: weight-tracker-api
+    spec:
+      containers:
+      - name: api
+        image: ghcr.io/omtut/weight-tracker-api:latest # {"$imagepolicy": "flux-system:weight-tracker-api"}
+        ports:
+        - containerPort: 8000
+          name: http
+        env:
+        - name: DATABASE_URL
+          value: sqlite:////app/data/db.sqlite
+        envFrom:
+        - secretRef:
+            name: api-secret
+        volumeMounts:
+        - name: data
+          mountPath: /app/data
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: weight-tracker-data

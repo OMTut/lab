@@ -1,0 +1,74 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: weight-tracker-api
+  namespace: flux-system
+spec:
+  image: ghcr.io/omtut/weight-tracker-api
+  interval: 5m
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: weight-tracker-web
+  namespace: flux-system
+spec:
+  image: ghcr.io/omtut/weight-tracker-web
+  interval: 5m
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: weight-tracker-api
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: weight-tracker-api
+  filterTags:
+    pattern: '^sha-[a-f0-9]+'
+  policy:
+    alphabetical:
+      order: asc
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: weight-tracker-web
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: weight-tracker-web
+  filterTags:
+    pattern: '^sha-[a-f0-9]+'
+  policy:
+    alphabetical:
+      order: asc
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: weight-tracker
+  namespace: flux-system
+spec:
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |
+        chore: update weight-tracker images
+        {{range .Updated.Images}}
+        - {{println .}}{{end}}
+    push:
+      branch: main
+  update:
+    path: ./apps/base/weight-tracker
+    strategy: Setters
