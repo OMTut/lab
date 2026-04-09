@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admirals-log
+  namespace: admirals-log
+  labels:
+    app: admirals-log
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admirals-log
+  template:
+    metadata:
+      labels:
+        app: admirals-log
+    spec:
+      containers:
+      - name: admirals-log
+        image: ghcr.io/omtut/admirals-log:latest # {"$imagepolicy": "flux-system:admirals-log"}
+        ports:
+        - containerPort: 80
+          name: http
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "25m"
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
