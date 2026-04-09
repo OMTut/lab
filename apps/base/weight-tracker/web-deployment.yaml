@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: ghcr.io/omtut/weight-tracker-web:latest # {"$imagepolicy": "flux-system:weight-tracker-web"}
+        image: ghcr.io/omtut/weight-tracker-web:sha-aab9ecef2f22f60fd0a4cc55a375621e7892f6e3 # {"$imagepolicy": "flux-system:weight-tracker-web"}
         ports:
         - containerPort: 80
           name: http
