@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: admirals-log
-        image: ghcr.io/omtut/admirals-log:sha-f6c55e3d868d749beb3152f45164177958cb9b6b # {"$imagepolicy": "flux-system:admirals-log"}
+        image: ghcr.io/omtut/admirals-log:build-6 # {"$imagepolicy": "flux-system:admirals-log"}
         ports:
         - containerPort: 80
           name: http
