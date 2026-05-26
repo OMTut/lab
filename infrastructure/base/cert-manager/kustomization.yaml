@@ -13,3 +13,4 @@ resources:
   - cert-minio.yaml
   - cert-plane.yaml
   - cloudflare-api-token.yaml
+  - clusterissuer-letsencrypt-prod.yaml
