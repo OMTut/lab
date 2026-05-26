@@ -21,3 +21,5 @@ spec:
           default: true
         exposedPort: 8443
         protocol: TCP
+        tls:
+          enabled: true
