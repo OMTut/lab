@@ -6,10 +6,7 @@ metadata:
 spec:
   entryPoints:
     - web-public
-  tls:
-    secretName: mealie-public-tls
-    domains:
-      - main: mealie.hondo-dev.com
+  tls: {}
   routes:
     - match: Host(`mealie.hondo-dev.com`)
       kind: Rule

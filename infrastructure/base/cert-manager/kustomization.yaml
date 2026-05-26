@@ -14,3 +14,4 @@ resources:
   - cert-plane.yaml
   - cloudflare-api-token.yaml
   - clusterissuer-letsencrypt-prod.yaml
+  - cert-wildcard-public.yaml

@@ -4,3 +4,4 @@ resources:
   - dashboard.yaml
   - helm-chart-config.yaml
   - middleware-public-whitelist.yaml
+  - tlsstore-default.yaml
