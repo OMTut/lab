@@ -7,7 +7,7 @@ spec:
   valuesContent: |-
     ports:
       web-public:
-        port: 8443
+        port: 9443
         expose:
           default: true
         exposedPort: 8443
