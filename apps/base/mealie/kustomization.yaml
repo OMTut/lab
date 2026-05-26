@@ -7,3 +7,4 @@ resources:
   - service.yaml
   - ingress.yaml
   - certificate.yaml
+  - ingress-public.yaml

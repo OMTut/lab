@@ -1,0 +1,19 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mealie-public
+  namespace: mealie
+spec:
+  entryPoints:
+    - websecure-public
+  tls:
+    secretName: mealie-public-tls
+  routes:
+    - match: Host(`mealie.hondo-dev.com`)
+      kind: Rule
+      middlewares:
+        - name: public-whitelist
+          namespace: kube-system
+      services:
+        - name: mealie-service
+          port: 9000
