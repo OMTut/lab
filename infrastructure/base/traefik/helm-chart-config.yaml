@@ -5,6 +5,9 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
+    logs:
+      access:
+        enabled: true
     providers:
       kubernetesCRD:
         allowCrossNamespace: true
