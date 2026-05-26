@@ -1,12 +1,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: mealie-staging-cert
+  name: mealie-cert-public
   namespace: mealie
 spec:
-  secretName: mealie-staging-tls
+  secretName: mealie-public-tls
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
     - mealie.hondo-dev.com
