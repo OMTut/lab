@@ -5,7 +5,7 @@ metadata:
   namespace: mealie
 spec:
   entryPoints:
-    - websecure-public
+    - web-public
   tls:
     secretName: mealie-public-tls
   routes:

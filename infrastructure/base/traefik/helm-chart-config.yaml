@@ -6,7 +6,7 @@ metadata:
 spec:
   valuesContent: |-
     ports:
-      websecure-public:
+      web-public:
         port: 8443
         expose:
           default: true
