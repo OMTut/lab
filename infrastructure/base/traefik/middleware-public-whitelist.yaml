@@ -4,6 +4,6 @@ metadata:
   name: public-whitelist
   namespace: kube-system
 spec:
-  ipWhiteList:
+  ipAllowList:
     sourceRange:
       - 10.0.0.1/32
