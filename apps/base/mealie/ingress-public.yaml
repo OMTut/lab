@@ -11,9 +11,6 @@ spec:
   routes:
     - match: Host(`mealie.hondo-dev.com`)
       kind: Rule
-      middlewares:
-        - name: public-whitelist
-          namespace: kube-system
       services:
         - name: mealie-service
           port: 9000
