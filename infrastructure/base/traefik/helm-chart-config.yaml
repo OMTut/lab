@@ -5,6 +5,9 @@ metadata:
   namespace: kube-system
 spec:
   valuesContent: |-
+    providers:
+      kubernetesCRD:
+        allowCrossNamespace: true
     ports:
       web-public:
         port: 9443
