@@ -1,0 +1,4 @@
+*.discord-role-bot
+/discord-role-bot
+apps/base/discord-role-bot
+apps/staging/discord-role-bot
