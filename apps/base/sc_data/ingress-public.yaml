@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: scdata-public
+  namespace: scdata
+spec:
+  entryPoints:
+    - web-public
+  tls: {}
+  routes:
+    - match: Host(`scdata.hondo-dev.com`)
+      kind: Rule
+      middlewares:
+        - name: public-whitelist
+          namespace: kube-system
+      services:
+        - name: scdata-service
+          port: 9000

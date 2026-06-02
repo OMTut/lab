@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scdata
+  namespace: scdata
+  labels:
+    app: scdata
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scdata
+  template:
+    metadata:
+      labels:
+        app: scdata
+        db-access: arasaka
+    spec:
+      containers:
+      - name: scdata
+        image: ghcr.io/omtut/sc-data-api:build-1 # {"$imagepolicy": "flux-system:sc-data-api"}
+        ports:
+        - containerPort: 9000
+          name: http
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: sc-data-secret
+              key: database-url
+        - name: CORS_ORIGINS
+          value: "https://scdata.hondo-dev.com"
+        livenessProbe:
+          httpGet:
+            path: /docs
+            port: 9000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /docs
+            port: 9000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "25m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
