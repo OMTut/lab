@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: scdata
-        image: ghcr.io/omtut/sc-data-api:build-1 # {"$imagepolicy": "flux-system:sc-data-api"}
+        image: ghcr.io/omtut/sc-data-api:build-2 # {"$imagepolicy": "flux-system:sc-data-api"}
         ports:
         - containerPort: 9000
           name: http
