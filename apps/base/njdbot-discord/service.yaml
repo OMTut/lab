@@ -12,4 +12,4 @@ spec:
     targetPort: 8001
   selector:
     app: njdbot-discord
-  type: LoadBalancer
+  type: ClusterIP
