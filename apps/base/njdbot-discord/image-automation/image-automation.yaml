@@ -1,0 +1,52 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: njdbot-discord
+  namespace: flux-system
+spec:
+  image: ghcr.io/omtut/discord-role-bot
+  interval: 5m
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: njdbot-discord
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: njdbot-discord
+  filterTags:
+    pattern: '^v(\d+\.\d+\.\d+)'
+    extract: '$1'
+  policy:
+    semver:
+      range: '>=1.0.0'
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: njdbot-discord
+  namespace: flux-system
+spec:
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |
+        chore: update njdbot-discord image
+        {{range .Updated.Images}}
+        - {{println .}}{{end}}
+    push:
+      branch: main
+  update:
+    path: ./apps/base/njdbot-discord
+    strategy: Setters

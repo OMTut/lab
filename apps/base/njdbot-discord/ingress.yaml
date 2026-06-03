@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: njdbot-discord-public
+  namespace: njdbot-discord
+spec:
+  entryPoints:
+    - web-public
+  tls: {}
+  routes:
+    - match: Host(`njdbot.hondo-dev.com`)
+      kind: Rule
+      middlewares:
+        - name: public-whitelist
+          namespace: kube-system
+      services:
+        - name: njdbot-discord-service
+          port: 8001

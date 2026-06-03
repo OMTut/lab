@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: njdbot-discord
+  namespace: njdbot-discord
+  labels:
+    app: njdbot-discord
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: njdbot-discord
+  template:
+    metadata:
+      labels:
+        app: njdbot-discord
+    spec:
+      containers:
+      - name: njdbot-discord
+        image: ghcr.io/omtut/discord-role-bot:latest # {"$imagepolicy": "flux-system:njdbot-discord"}
+        ports:
+        - containerPort: 8001
+        envFrom:
+        - secretRef:
+            name: njdbot-discord-secret
+        volumeMounts:
+        - name: logs
+          mountPath: /app/logs
+      volumes:
+      - name: logs
+        persistentVolumeClaim:
+          claimName: njdbot-discord-data-pvc
