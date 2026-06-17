@@ -19,6 +19,7 @@ spec:
       containers:
       - name: naja-admin-api
         image: ghcr.io/omtut/naja-admin-api:build-1 # {"$imagepolicy": "flux-system:naja-admin-api"}
+        imagePullPolicy: Always
         ports:
         - containerPort: 8000
           name: http
