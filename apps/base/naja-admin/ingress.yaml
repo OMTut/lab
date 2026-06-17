@@ -1,0 +1,37 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: naja-admin-frontend-public
+  namespace: naja-admin
+spec:
+  entryPoints:
+    - web-public
+  tls: {}
+  routes:
+    - match: Host(`naja.hondo-dev.com`)
+      kind: Rule
+      middlewares:
+        - name: public-whitelist
+          namespace: kube-system
+      services:
+        - name: naja-admin-frontend-service
+          port: 80
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: naja-admin-api-public
+  namespace: naja-admin
+spec:
+  entryPoints:
+    - web-public
+  tls: {}
+  routes:
+    - match: Host(`naja-api.hondo-dev.com`)
+      kind: Rule
+      middlewares:
+        - name: public-whitelist
+          namespace: kube-system
+      services:
+        - name: naja-admin-api-service
+          port: 8000

@@ -1,0 +1,76 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: naja-admin-api
+  namespace: flux-system
+spec:
+  image: ghcr.io/omtut/naja-admin-api
+  interval: 5m
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: naja-admin-api
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: naja-admin-api
+  filterTags:
+    pattern: '^build-(\d+)'
+    extract: '$1'
+  policy:
+    numerical:
+      order: asc
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: naja-admin-frontend
+  namespace: flux-system
+spec:
+  image: ghcr.io/omtut/naja-admin-frontend
+  interval: 5m
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: naja-admin-frontend
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: naja-admin-frontend
+  filterTags:
+    pattern: '^build-(\d+)'
+    extract: '$1'
+  policy:
+    numerical:
+      order: asc
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: naja-admin
+  namespace: flux-system
+spec:
+  interval: 1m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: |
+        chore: update naja-admin images
+        {{range .Updated.Images}}
+        - {{println .}}{{end}}
+    push:
+      branch: main
+  update:
+    path: ./apps/base/naja-admin
+    strategy: Setters

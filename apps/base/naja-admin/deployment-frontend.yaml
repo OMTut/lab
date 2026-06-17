@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: naja-admin-frontend
+  namespace: naja-admin
+  labels:
+    app: naja-admin-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: naja-admin-frontend
+  template:
+    metadata:
+      labels:
+        app: naja-admin-frontend
+    spec:
+      containers:
+      - name: naja-admin-frontend
+        image: ghcr.io/omtut/naja-admin-frontend:build-1 # {"$imagepolicy": "flux-system:naja-admin-frontend"}
+        ports:
+        - containerPort: 80
+          name: http
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "10m"
+          limits:
+            memory: "64Mi"
+            cpu: "50m"
