@@ -12,6 +12,7 @@ resources:
   - cert-grafana-wc.yaml
   - cert-minio.yaml
   - cert-plane.yaml
+  - cert-ollama.yaml
   - cloudflare-api-token.yaml
   - clusterissuer-letsencrypt-prod.yaml
   - cert-wildcard-public.yaml

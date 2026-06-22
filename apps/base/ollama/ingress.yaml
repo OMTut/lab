@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ollama
+  namespace: ollama
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: ollama-tls
+  routes:
+    - match: Host(`ollama.wc`)
+      kind: Rule
+      services:
+        - name: ollama-service
+          port: 11434
