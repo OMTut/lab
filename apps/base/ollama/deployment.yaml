@@ -22,7 +22,7 @@ spec:
               ollama serve &
               OLLAMA_PID=$!
               until ollama list > /dev/null 2>&1; do sleep 1; done
-              ollama pull moondream
+              ollama pull llava-phi3
               wait $OLLAMA_PID
           ports:
             - containerPort: 11434
