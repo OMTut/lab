@@ -9,7 +9,7 @@ spec:
   ports:
     - port: 9080
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: pgadmin4
   type: LoadBalancer
