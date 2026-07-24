@@ -1,0 +1,18 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: schub-public
+  namespace: schub
+spec:
+  entryPoints:
+    - web-public
+  tls: {}
+  routes:
+    - match: Host(`schub.hondo-dev.com`)
+      kind: Rule
+      middlewares:
+        - name: public-whitelist
+          namespace: kube-system
+      services:
+        - name: schub
+          port: 80
