@@ -17,7 +17,7 @@ spec:
         - name: ghcr-pull-secret
       containers:
         - name: schub
-          image: ghcr.io/OMTut/SC_Hub:latest
+          image: ghcr.io/omtut/sc_hub:latest
           ports:
             - containerPort: 80
               name: http
