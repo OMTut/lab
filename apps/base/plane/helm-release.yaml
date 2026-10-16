@@ -57,3 +57,29 @@ spec:
     worker:
       memoryLimit: 2Gi
       memoryRequest: 500Mi
+    extraObjects:
+      - apiVersion: traefik.io/v1alpha1
+        kind: Middleware
+        metadata:
+          name: plane-https-redirect
+          namespace: plane
+        spec:
+          redirectScheme:
+            scheme: https
+            permanent: true
+      - apiVersion: traefik.io/v1alpha1
+        kind: IngressRoute
+        metadata:
+          name: plane-http-redirect
+          namespace: plane
+        spec:
+          entryPoints:
+            - web
+          routes:
+            - match: Host(`plane.wc`)
+              kind: Rule
+              middlewares:
+                - name: plane-https-redirect
+              services:
+                - name: plane-web
+                  port: 3000
