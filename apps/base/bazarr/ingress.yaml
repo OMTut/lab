@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: bazarr
+  namespace: arr
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: bazarr-tls
+  routes:
+    - match: Host(`bazarr.wc`)
+      kind: Rule
+      services:
+        - name: bazarr-service
+          port: 6767
