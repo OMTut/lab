@@ -22,7 +22,7 @@ spec:
           - 993   # render group
       containers:
       - name: jellyfin
-        image: jellyfin/jellyfin:10.11.11
+        image: jellyfin/jellyfin:12.2
         ports:
         - containerPort: 8096
         env:
