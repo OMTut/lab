@@ -15,19 +15,15 @@ spec:
     spec:
       containers:
       - name: jellyseerr
-        image: lscr.io/linuxserver/jellyseerr:latest
+        image: fallenbagel/jellyseerr:latest
         ports:
         - containerPort: 5055
         env:
-        - name: PUID
-          value: "3010"
-        - name: PGID
-          value: "568"
         - name: TZ
           value: "America/Chicago"
         volumeMounts:
         - name: jellyseerr-config
-          mountPath: /config
+          mountPath: /app/config
         resources:
           limits:
             memory: "512Mi"
