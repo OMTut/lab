@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: qbittorrent
+  namespace: arr
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: qbittorrent-tls
+  routes:
+    - match: Host(`qbittorrent.wc`)
+      kind: Rule
+      services:
+        - name: qbittorrent-service
+          port: 8080

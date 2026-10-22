@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: qbittorrent-cert
+  namespace: arr
+spec:
+  secretName: qbittorrent-tls
+  issuerRef:
+    name: internal-ca-issuer
+    kind: ClusterIssuer
+  dnsNames:
+    - qbittorrent.wc
+  duration: 2160h # 90 days
+  renewBefore: 360h # 15 days
+  privateKey:
+    algorithm: RSA
+    size: 2048

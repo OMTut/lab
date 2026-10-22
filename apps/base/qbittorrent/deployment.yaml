@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: arr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      containers:
+      - name: gluetun
+        image: qmcgaw/gluetun:v3.41.3
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+        env:
+        - name: VPN_SERVICE_PROVIDER
+          value: "protonvpn"
+        - name: VPN_TYPE
+          value: "wireguard"
+        - name: WIREGUARD_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: gluetun-secret
+              key: WIREGUARD_PRIVATE_KEY
+        - name: SERVER_COUNTRIES
+          value: "United States"
+        - name: TZ
+          value: "America/Chicago"
+        volumeMounts:
+        - name: tun-device
+          mountPath: /dev/net/tun
+        resources:
+          limits:
+            memory: "256Mi"
+          requests:
+            memory: "128Mi"
+      - name: qbittorrent
+        image: lscr.io/linuxserver/qbittorrent:5.3.0_v2.1.2-ls484
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PUID
+          value: "3008"
+        - name: PGID
+          value: "568"
+        - name: TZ
+          value: "America/Chicago"
+        - name: WEBUI_PORT
+          value: "8080"
+        volumeMounts:
+        - name: qbittorrent-config
+          mountPath: /config
+        - name: arr-downloads
+          mountPath: /downloads
+        resources:
+          limits:
+            memory: "1Gi"
+          requests:
+            memory: "256Mi"
+      volumes:
+      - name: tun-device
+        hostPath:
+          path: /dev/net/tun
+      - name: qbittorrent-config
+        persistentVolumeClaim:
+          claimName: qbittorrent-config-pvc
+      - name: arr-downloads
+        persistentVolumeClaim:
+          claimName: arr-downloads-pvc
