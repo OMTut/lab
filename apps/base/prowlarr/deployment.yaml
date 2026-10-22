@@ -20,9 +20,9 @@ spec:
         - containerPort: 9696
         env:
         - name: PUID
-          value: "1000"
+          value: "3007"
         - name: PGID
-          value: "1000"
+          value: "568"
         - name: TZ
           value: "America/Chicago"
         volumeMounts:
