@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyseerr
+  namespace: arr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyseerr
+  template:
+    metadata:
+      labels:
+        app: jellyseerr
+    spec:
+      containers:
+      - name: jellyseerr
+        image: lscr.io/linuxserver/jellyseerr:2.5.2
+        ports:
+        - containerPort: 5055
+        env:
+        - name: PUID
+          value: "3010"
+        - name: PGID
+          value: "568"
+        - name: TZ
+          value: "America/Chicago"
+        volumeMounts:
+        - name: jellyseerr-config
+          mountPath: /config
+        resources:
+          limits:
+            memory: "512Mi"
+          requests:
+            memory: "256Mi"
+      volumes:
+      - name: jellyseerr-config
+        persistentVolumeClaim:
+          claimName: jellyseerr-config-pvc
