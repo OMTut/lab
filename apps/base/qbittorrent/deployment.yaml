@@ -36,6 +36,8 @@ spec:
           value: "America/Chicago"
         - name: DOT_PROVIDERS
           value: "quad9"
+        - name: WIREGUARD_MTU
+          value: "1280"
         volumeMounts:
         - name: tun-device
           mountPath: /dev/net/tun
