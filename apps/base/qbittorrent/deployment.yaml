@@ -34,6 +34,8 @@ spec:
           value: "United States"
         - name: TZ
           value: "America/Chicago"
+        - name: DOT_PROVIDERS
+          value: "quad9"
         volumeMounts:
         - name: tun-device
           mountPath: /dev/net/tun
