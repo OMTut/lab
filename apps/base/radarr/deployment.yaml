@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+  namespace: arr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+      - name: radarr
+        image: lscr.io/linuxserver/radarr:6.4.4.10685-ls323
+        ports:
+        - containerPort: 7878
+        env:
+        - name: PUID
+          value: "3005"
+        - name: PGID
+          value: "568"
+        - name: TZ
+          value: "America/Chicago"
+        volumeMounts:
+        - name: radarr-config
+          mountPath: /config
+        - name: arr-media
+          mountPath: /media
+        - name: arr-downloads
+          mountPath: /downloads
+        resources:
+          limits:
+            memory: "512Mi"
+          requests:
+            memory: "256Mi"
+      volumes:
+      - name: radarr-config
+        persistentVolumeClaim:
+          claimName: radarr-config-pvc
+      - name: arr-media
+        persistentVolumeClaim:
+          claimName: arr-media-pvc
+      - name: arr-downloads
+        persistentVolumeClaim:
+          claimName: arr-downloads-pvc

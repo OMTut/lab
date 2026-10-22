@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: radarr
+  namespace: arr
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: radarr-tls
+  routes:
+    - match: Host(`radarr.wc`)
+      kind: Rule
+      services:
+        - name: radarr-service
+          port: 7878
