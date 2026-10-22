@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prowlarr
+  namespace: arr
+spec:
+  entryPoints:
+    - websecure
+  tls:
+    secretName: prowlarr-tls
+  routes:
+    - match: Host(`prowlarr.wc`)
+      kind: Rule
+      services:
+        - name: prowlarr-service
+          port: 9696
