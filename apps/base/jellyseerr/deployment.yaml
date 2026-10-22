@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: jellyseerr
-        image: lscr.io/linuxserver/jellyseerr:2.5.2
+        image: lscr.io/linuxserver/jellyseerr:latest
         ports:
         - containerPort: 5055
         env:
