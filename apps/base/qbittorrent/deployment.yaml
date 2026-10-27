@@ -32,17 +32,13 @@ spec:
               key: WIREGUARD_PRIVATE_KEY
         - name: WIREGUARD_PUBLIC_KEY
           value: "c3TmpWQpDWDSECuw2fL559wdnQG4NOOaMSBcZVjutG4="
-        - name: VPN_ENDPOINT_IP
-          value: "79.127.183.235"
-        - name: VPN_ENDPOINT_PORT
-          value: "51820"
+        - name: ENDPOINT
+          value: "79.127.183.235:51820"
         - name: WIREGUARD_ADDRESSES
           value: "10.2.0.2/32"
-        - name: WIREGUARD_PERSISTENT_KEEPALIVE_INTERVAL
-          value: "25"
         - name: TZ
           value: "America/Chicago"
-        - name: DNS_ADDRESS
+        - name: DNS_PLAINTEXT_ADDRESS
           value: "10.2.0.1"
         - name: WIREGUARD_MTU
           value: "1280"
