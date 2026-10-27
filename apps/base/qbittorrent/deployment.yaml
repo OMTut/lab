@@ -34,7 +34,7 @@ spec:
           value: "United States"
         - name: TZ
           value: "America/Chicago"
-        - name: DOT_PROVIDERS
+        - name: DNS_UPSTREAM_RESOLVERS
           value: "cloudflare"
         - name: WIREGUARD_MTU
           value: "1280"
