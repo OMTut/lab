@@ -34,6 +34,8 @@ spec:
           value: "United States"
         - name: TZ
           value: "America/Chicago"
+        - name: DOT_PROVIDERS
+          value: "cloudflare"
         - name: WIREGUARD_MTU
           value: "1280"
         lifecycle:
