@@ -42,8 +42,8 @@ spec:
           value: "25"
         - name: TZ
           value: "America/Chicago"
-        - name: DOT_PROVIDERS
-          value: "quad9"
+        - name: DNS_ADDRESS
+          value: "10.2.0.1"
         - name: WIREGUARD_MTU
           value: "1280"
         lifecycle:
