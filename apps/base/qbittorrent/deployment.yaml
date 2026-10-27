@@ -38,13 +38,6 @@ spec:
           value: "cloudflare"
         - name: WIREGUARD_MTU
           value: "1280"
-        lifecycle:
-          postStart:
-            exec:
-              command:
-                - /bin/sh
-                - -c
-                - "until ip rule show | grep -q '^100:'; do sleep 1; done; ip rule del priority 100; true"
         volumeMounts:
         - name: tun-device
           mountPath: /dev/net/tun
