@@ -13,6 +13,10 @@ spec:
       labels:
         app: qbittorrent
     spec:
+      dnsPolicy: None
+      dnsConfig:
+        nameservers:
+          - 10.2.0.1
       containers:
       - name: gluetun
         image: qmcgaw/gluetun:latest
@@ -34,6 +38,8 @@ spec:
           value: "United States"
         - name: TZ
           value: "America/Chicago"
+        - name: DNS_KEEP_NAMESERVER
+          value: "on"
         - name: WIREGUARD_MTU
           value: "1280"
         volumeMounts:
