@@ -22,7 +22,7 @@ spec:
               - NET_ADMIN
         env:
         - name: VPN_SERVICE_PROVIDER
-          value: "custom"
+          value: "protonvpn"
         - name: VPN_TYPE
           value: "wireguard"
         - name: WIREGUARD_PRIVATE_KEY
@@ -30,16 +30,10 @@ spec:
             secretKeyRef:
               name: gluetun-secret
               key: WIREGUARD_PRIVATE_KEY
-        - name: WIREGUARD_PUBLIC_KEY
-          value: "c3TmpWQpDWDSECuw2fL559wdnQG4NOOaMSBcZVjutG4="
-        - name: ENDPOINT
-          value: "79.127.183.235:51820"
-        - name: WIREGUARD_ADDRESSES
-          value: "10.2.0.2/32"
+        - name: SERVER_COUNTRIES
+          value: "United States"
         - name: TZ
           value: "America/Chicago"
-        - name: DNS_PLAINTEXT_ADDRESS
-          value: "10.2.0.1"
         - name: WIREGUARD_MTU
           value: "1280"
         lifecycle:
