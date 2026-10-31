@@ -27,6 +27,10 @@ spec:
         env:
         - name: VPN_SERVICE_PROVIDER
           value: "protonvpn"
+        - name: VPN_PORT_FORWARDING
+          value: "on"
+        - name: VPN_PORT_FORWARDING_PROVIDER
+          value: "protonvpn"
         - name: VPN_TYPE
           value: "wireguard"
         - name: WIREGUARD_PRIVATE_KEY
