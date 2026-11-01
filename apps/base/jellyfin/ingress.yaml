@@ -6,7 +6,9 @@ metadata:
 spec:
   entryPoints:
     - websecure
-  tls: {}
+  tls:
+    stores:
+      - name: default
   routes:
     - match: Host(`jellyfin.hondo-dev.com`)
       kind: Rule
