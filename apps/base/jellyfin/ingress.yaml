@@ -6,10 +6,9 @@ metadata:
 spec:
   entryPoints:
     - websecure
-  tls:
-    secretName: jellyfin-tls
+  tls: {}
   routes:
-    - match: Host(`jellyfin.wc`)
+    - match: Host(`jellyfin.hondo-dev.com`)
       kind: Rule
       services:
         - name: jellyfin-service
